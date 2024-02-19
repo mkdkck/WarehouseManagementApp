@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Welcome = () => {
     return (
         <div className="container">
             <h1>
@@ -10,4 +10,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Welcome;
