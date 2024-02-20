@@ -4,14 +4,16 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
-import Welcome from './pages/Welcome.jsx'
+import Welcome from './pages/Welcome'
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Features from './pages/Features';
 import Home from './pages/Home';
 import Error from './pages/Error';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import TC from './pages/T&C'
+import Privacy from './pages/Privacy'
 
 const router = createBrowserRouter([
   {
@@ -31,15 +33,21 @@ const router = createBrowserRouter([
       }, {
         path: '/Features',
         element: <Features />
+      }, {
+        path: '/Login',
+        element: <Login />
+      }, {
+        path: '/Signup',
+        element: <Signup />
+      }, {
+        path: '/Privacy',
+        element: <Privacy />
+      }, {
+        path: '/T&C',
+        element: <TC />
       },
 
-      //  {
-      //   path: '/login',
-      //   element: <Login />
-      // }, {
-      //   path: '/signup',
-      //   element: <Signup />
-      // },
+
     ]
   }
 ]);

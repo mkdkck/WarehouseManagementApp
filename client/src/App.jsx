@@ -35,9 +35,9 @@ function App() {
     <ApolloProvider client={client}>
       <div >
         <WMSProvider>
-          <div className='container max-w-screen-xl mx-auto h-screen'>
+          <div className='container flex-col max-w-screen-xl mx-auto min-h-dvh relative'>
             <Header />
-            <div >
+            <div className='lg:mt-20'>
               <Outlet />
             </div>
             <Footer />

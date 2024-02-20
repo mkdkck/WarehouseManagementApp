@@ -35,13 +35,13 @@ const productStackSchema = new Schema({
         default: 1,
         min: 1
     }
-    {
-        toJSON: {
-            virtuals: true,
-        },
-        id: false,
-    }
-})
+}, {
+    toJSON: {
+        virtuals: true,
+    },
+    id: false,
+}
+)
 
 productStackSchema.virtual('subTotalQty').get(function () {
     return this.pkQty * this.packageConfig.itemPerPk + this.layerQty * this.packageConfig.pkPerlayer + this.palletQty * this.packageConfig.layerPerPallet;

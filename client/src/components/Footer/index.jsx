@@ -2,18 +2,18 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer className="bg-white">
-            <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
+        <footer className="bg-white absolute bottom-0 min-w-full">
+            <div className="mx-auto  max-w-screen-xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
                 <div
                     className="mt-4 border-t border-gray-100 pt-8 sm:flex sm:items-center sm:justify-between"
                 >
                     <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
                         <li>
-                            <a href="#" className="text-gray-500 transition hover:opacity-75"> Terms & Conditions </a>
+                            <a href="/T&C" className="text-gray-500 transition hover:opacity-75"> Terms & Conditions </a>
                         </li>
 
                         <li>
-                            <a href="#" className="text-gray-500 transition hover:opacity-75"> Privacy Policy </a>
+                            <a href="/Privacy" className="text-gray-500 transition hover:opacity-75"> Privacy Policy </a>
                         </li>
                     </ul>
 
@@ -58,7 +58,7 @@ const Footer = () => {
 
                         <li>
                             <a
-                                href="#"
+                                href="https://github.com/mkdkck/smallBusinessWMS"
                                 rel="noreferrer"
                                 target="_blank"
                                 className="text-gray-700 transition hover:opacity-75"

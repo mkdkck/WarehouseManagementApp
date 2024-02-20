@@ -3,12 +3,19 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
+    password:String
     role:String
     organization:String
   }
 
+  type Organization{
+    _id:ID
+    OrgName:String!
+    Members:[User]
+  }
+
   type Auth {
-    token: ID
+    token:ID
     user: User
   }
 
