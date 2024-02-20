@@ -6,6 +6,7 @@ const Warehouse = require('./Warehouse');
 const PackageConfig = require('./PackageConfig');
 
 
+
 module.exports = {
     User, Organization, Warehouse, Category, PackageConfig, Product
 };

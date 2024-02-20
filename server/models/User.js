@@ -22,6 +22,11 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: true,
+    },
+    organization: {
+        type: Schema.Types.ObjectId,
+        ref: 'Organization',
+        required: true,
     }
 });
 
