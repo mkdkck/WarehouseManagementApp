@@ -7,26 +7,8 @@ import Auth from '../utils/auth'
 function Signup() {
     const [formState, setFormState] = useState({ username: '', email: '', password: '', organization: '' });
     const [addUser, { error }] = useMutation(ADD_USER);
-    const [validated] = useState(false);
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        const mutationResponse = await addUser({
-            variables: {
-                username: formState.username,
-                email: formState.email,
-                password: formState.password,
-                role: 'admin',
-                organization: formState.organization,
-            },
-        });
-        console.log(mutationResponse)
-        console.log(formState)
-        const token = mutationResponse.data.addUser.token;
-        Auth.login(token);
-    };
-
-    const handleChange = (event) => {
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormState({
             ...formState,
@@ -34,13 +16,44 @@ function Signup() {
         });
     };
 
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        if (!formState.username || !formState.email || !formState.password || !formState.organization) {
+            alert("All fields are required");
+            return;
+        }
+        if (formState.password.length < 5) {
+            alert("Password need to have at least 5 characters");
+            return;
+        }
+
+        try {
+            const mutationResponse = await addUser({
+                variables: {
+                    username: formState.username,
+                    email: formState.email,
+                    password: formState.password,
+                    role: 'admin',
+                    organization: formState.organization,
+                },
+            });
+            const token = mutationResponse.data.addUser.token;
+            Auth.login(token);
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+        window.location.assign('/Home');
+    };
+
+
+
     return (
         <div className="flex flex-col mx-auto max-w-md p-6 rounded-md sm:p-10 bg-gray-50 text-gray-800">
             <div className="mb-8 text-center">
                 <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
                 <p className="text-sm text-gray-600">Sign in to access your account</p>
             </div>
-            <form noValidate validated={validated} className="space-y-12" onSubmit={handleFormSubmit}>
+            <form className="space-y-12" onSubmit={handleFormSubmit}>
                 <div className="space-y-4">
                     <div>
                         <label className="block mb-2 text-sm">Username</label>
@@ -50,7 +63,7 @@ function Signup() {
                             id="username"
                             placeholder="username"
                             className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
-                            onChange={handleChange} />
+                            onChange={handleInputChange} />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm">Email address</label>
@@ -60,7 +73,7 @@ function Signup() {
                             id="email"
                             placeholder="john@gmail.com"
                             className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
-                            onChange={handleChange} />
+                            onChange={handleInputChange} />
                     </div>
                     <div>
                         <div className="flex justify-between mb-2">
@@ -72,7 +85,7 @@ function Signup() {
                             id="password"
                             placeholder="*****"
                             className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
-                            onChange={handleChange} />
+                            onChange={handleInputChange} />
                     </div>
                     <div>
                         <div className="flex justify-between mb-2">
@@ -84,7 +97,7 @@ function Signup() {
                             id="organization"
                             placeholder="org"
                             className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
-                            onChange={handleChange} />
+                            onChange={handleInputChange} />
                     </div>
                 </div>
                 <div className="space-y-2">
