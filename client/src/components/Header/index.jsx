@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
 import {
     Bars3Icon,
@@ -8,7 +8,6 @@ import {
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const currentPage = useLocation().pathname;
 
     return (
         <header className="bg-white">
@@ -36,19 +35,19 @@ export default function Header() {
                     <span className="text-sm font-semibold leading-6 text-gray-900">
                         <NavLink
                             to="/Features"
-                            className={currentPage === '/Features' ? 'rounded-md bg-indigo-500 p-1' : ''}
+                            className={({ isActive }) => isActive ? 'rounded-md bg-indigo-500 p-1' : ''}
                         >Features
                         </NavLink>
                     </span> <span className="text-sm font-semibold leading-6 text-gray-900">
                         <NavLink
                             to="/About"
-                            className={currentPage === '/About' ? 'rounded-md bg-indigo-500 p-1' : 'nav-link'}
+                            className={({ isActive }) => isActive ? 'rounded-md bg-indigo-500 p-1' : ''}
                         >About
                         </NavLink>
                     </span> <span className="text-sm font-semibold leading-6 text-gray-900">
                         <NavLink
                             to="/Contact"
-                            className={currentPage === '/Contact' ? 'rounded-md bg-indigo-500 p-1' : 'nav-link'}
+                            className={({ isActive }) => isActive ? 'rounded-md bg-indigo-500 p-1' : ''}
                         >Contact
                         </NavLink>
                     </span>
@@ -56,12 +55,12 @@ export default function Header() {
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <NavLink
                         to="/Singup"
-                        className={currentPage === '/Singup' ? 'text-sm mx-4 font-semibold leading-6 text-gray-900' : 'text-sm mx-4 font-semibold leading-6 text-gray-900'}
+                        className='text-sm mx-4 font-semibold leading-6 text-gray-900'
                     >Sing Up
                     </NavLink>
                     <NavLink
                         to="/Login"
-                        className={currentPage === '/Login' ? 'text-sm mx-4 font-semibold leading-6 text-gray-900' : 'text-sm mx-4 font-semibold leading-6 text-gray-900'}
+                        className='text-sm mx-4 font-semibold leading-6 text-grey-900 rounded-md bg-violet-400 px-3'
                     >Login
                     </NavLink>
 
@@ -87,19 +86,19 @@ export default function Header() {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
                                 <a
-                                    href="#"
+                                    href="/Features"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Features
                                 </a>
                                 <a
-                                    href="#"
+                                    href="/About"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     About
                                 </a>
                                 <a
-                                    href="#"
+                                    href="/Contact"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Contact
@@ -107,13 +106,13 @@ export default function Header() {
                             </div>
                             <div className="py-6">
                                 <a
-                                    href="#"
+                                    href="/Signup"
                                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Sign Up
                                 </a>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Log in
