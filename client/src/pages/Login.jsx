@@ -5,6 +5,7 @@ import { LOGIN } from '../utils/mutations'
 import Auth from '../utils/auth'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 function Login() {
     const [formState, setFormState] = useState({ email: '', password: '' });
@@ -76,7 +77,10 @@ function Login() {
                             <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-violet-600 text-gray-50">Sign in</button>
                         </div>
                         <p className="px-6 text-sm text-center text-gray-600">Don't have an account yet?
-                            <a rel="noopener noreferrer" href="/Signup" className="hover:underline text-violet-600">Sign up</a>.
+                            <Link
+                                to='/Signup' className="hover:underline text-violet-600"
+                            >Sign up
+                            </Link>
                         </p>
                     </div>
                 </form>

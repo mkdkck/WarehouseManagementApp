@@ -8,6 +8,9 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import { WMSProvider } from './utils/WMSContext'
+import Auth from './utils/auth'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const httpLink = createHttpLink({
   uri: '/graphql',

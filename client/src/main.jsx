@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Auth from './utils/auth.js'
+import { Navigate } from 'react-router-dom';
 
 import App from './App.jsx';
 import Welcome from './pages/Welcome'
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
         element: <Features />
       }, {
         path: '/Login',
-        element: <Login />
+        element: Auth.loggedIn ? <Navigate to='/Home' /> : <Login />
       }, {
         path: '/Signup',
         element: <Signup />
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
         element: <TC />
       }, {
         path: '/Home',
-        element: <Home />
+        element: Auth.loggedIn ? <Home /> : <Navigate to='/Login' />
       },
     ]
   }
