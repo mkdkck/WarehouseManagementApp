@@ -5,10 +5,10 @@ import Sidebar from '../components/Sidebar'
 const Home = () => {
 
     return (
-        <>
+        <div className='p-6 h-screen'>
             <Sidebar />
 
-        </>
+        </div>
     );
 };
 

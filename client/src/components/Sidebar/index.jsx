@@ -1,34 +1,63 @@
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth'
 
 function Sidebar() {
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+    }
     return (
         <>
-            {/* <div className="h-full p-3 space-y-2 w-60 bg-gray-50 text-gray-800"> */}
-
-            <div className="flex items-center p-2 space-x-4">
-                <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
+            <div className="flex-col flex justify-between h-full p-3 w-60 bg-stone-400 text-gray-800 ">
                 <div>
-                    <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
-                    <span className="flex items-center space-x-1">
-                        <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">View profile</a>
-                    </span>
+                    <div className="flex items-center p-3 space-x-4 mt-3 mb-5">
+                        <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
+                        <div>
+                            <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
+                            <span className="flex items-center space-x-1">
+                                <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">View profile</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <ul className="menu bg-base-200 w-56 rounded-box">
+                        <li><a>Home</a></li>
+                        <li>
+                            Warehouse
+                        </li>
+                        <li>
+                            <details open>
+                                <summary>Product</summary>
+                                <ul className='ms-5'>
+                                    <li><a>View Products</a></li>
+                                    <li><a>Package Configuration</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details open>
+                                <summary>Reports</summary>
+                                <ul className='ms-5'>
+                                    <li><a>Stock Lists</a></li>
+                                    <li><a>Package Configuration</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            Organization
+                        </li>
+                        <li>
+                            <button onClick={logout}>
+                                Log Out
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            <ul className="menu bg-base-200 w-56 rounded-box">
-                <li><a>Item 1</a></li>
-                <li>
-                    <details open>
-                        <summary>Parent</summary>
-                        <ul>
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
-                    </details>
-                </li>
-                <li><a>Item 3</a></li>
-            </ul>
         </>
     );
 }

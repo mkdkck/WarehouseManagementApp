@@ -34,6 +34,14 @@ const productStackSchema = new Schema({
         required: true,
         default: 1,
         min: 1
+    },
+    warehouse: {
+        type: Schema.Types.ObjectId,
+        ref: 'Warehouse',
+        require: true
+    },
+    zoneCode: {
+        type: String
     }
 }, {
     toJSON: {
@@ -65,7 +73,10 @@ const productSchema = new Schema({
         ref: 'Category',
         required: true
     },
-    finance: [financeSchema]
+    finance: [financeSchema],
+    owner: {
+        type: String,
+    }
 }, {
     toJSON: {
         virtuals: true,
