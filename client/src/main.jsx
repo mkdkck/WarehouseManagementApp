@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import TC from './pages/T&C'
 import Privacy from './pages/Privacy'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
         element: <Features />
       }, {
         path: '/Login',
-        element: Auth.loggedIn ? <Navigate to='/Home' /> : <Login />
+        element: Auth.loggedIn() ? <Navigate to='/Home' /> : <Login />
       }, {
         path: '/Signup',
         element: <Signup />
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
         element: <TC />
       }, {
         path: '/Home',
-        element: Auth.loggedIn ? <Home /> : <Navigate to='/Login' />
+        element: Auth.loggedIn() ? <Home /> : <Navigate to='/Login' />
       },
     ]
   }
