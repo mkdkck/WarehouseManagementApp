@@ -1,13 +1,12 @@
-import { ADD_USER } from './actions'
+import { UPDATE_PRODUCTS } from './actions'
 
 export default function reducer(state, action) {
     switch (action.type) {
-        case ADD_USER: {
+        case UPDATE_PRODUCTS:
             return {
                 ...state,
                 user: action.payload,
-            };
-        }
+            }
 
         default:
             return state;

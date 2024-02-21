@@ -45,9 +45,10 @@ const router = createBrowserRouter([
       }, {
         path: '/T&C',
         element: <TC />
+      }, {
+        path: '/Home',
+        element: <Home />
       },
-
-
     ]
   }
 ]);

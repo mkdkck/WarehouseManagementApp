@@ -8,8 +8,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import { WMSProvider } from './utils/WMSContext'
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -33,17 +31,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div >
-        <WMSProvider>
-          <div className='container flex-col max-w-screen-xl mx-auto min-h-dvh relative'>
-            <Header />
-            <div className='lg:mt-20'>
-              <Outlet />
-            </div>
-            <Footer />
-          </div>
-        </WMSProvider>
-      </div>
+      <WMSProvider>
+        <div className='container flex-col max-w-screen-xl mx-auto min-h-dvh relative'>
+          <Outlet />
+        </div>
+      </WMSProvider>
     </ApolloProvider >
   );
 }

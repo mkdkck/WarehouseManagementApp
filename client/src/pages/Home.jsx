@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import Auth from '../utils/auth'
+import Sidebar from '../components/Sidebar'
 
 const Home = () => {
     return (
-        <div className="container">
-            <h1>
-                Welcome
-            </h1>
-        </div>
+        <><h1>home</h1>
+            <Sidebar />
+        </>
+
     );
 };
 
