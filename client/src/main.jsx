@@ -20,6 +20,7 @@ import Warehouse from './pages/Warehouse'
 import Product from './pages/Product.jsx'
 import Organization from './pages/Organization'
 import PkConfig from './pages/PkConfig'
+import Category from './pages/Category'
 
 
 
@@ -69,6 +70,9 @@ const router = createBrowserRouter([
       }, {
         path: '/PkConfig',
         element: Auth.loggedIn() ? <PkConfig /> : <Navigate to='/Login' />
+      }, {
+        path: '/Category',
+        element: Auth.loggedIn() ? <Category /> : <Navigate to='/Login' />
       }
     ]
   }
