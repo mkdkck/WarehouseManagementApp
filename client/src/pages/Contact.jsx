@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function Contact() {
     const [name, setName] = useState("");
@@ -70,47 +72,51 @@ export default function Contact() {
 
 
     return (
-        <div className="container">
-            <h1 className='text-center'>Contact</h1>
+        <>
+            <Header />
+            <div className="container lg:mt-20">
+                <h1 className='text-center'>Contact</h1>
 
-            <form id="contact" className="mt-3" onSubmit={handleFormSubmit}>
-                <div className="mb-3">
-                    <label className="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                    <input className="form-control"
-                        value={name}
-                        name="name"
-                        onChange={handleInputChange}
-                        onBlur={checkEmptyInput}
-                        type="text"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                    <input className="form-control"
-                        value={email}
-                        name="email"
-                        onChange={handleInputChange}
-                        onBlur={checkEmail}
-                        type="email"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="block text-sm font-medium leading-6 text-gray-900">Content</label>
-                    <textarea className="form-control" rows="5"
-                        value={content}
-                        name="content"
-                        onChange={handleInputChange}
-                        onBlur={checkEmptyInput}
-                        type="text"
-                    ></textarea>
-                </div>
-                {errorMessage && (
-                    <div>
-                        <p className="error-text">{errorMessage}</p>
+                <form id="contact" className="mt-3" onSubmit={handleFormSubmit}>
+                    <div className="mb-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                        <input className="form-control"
+                            value={name}
+                            name="name"
+                            onChange={handleInputChange}
+                            onBlur={checkEmptyInput}
+                            type="text"
+                        />
                     </div>
-                )}
-                <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
-            </form>
-        </div>
+                    <div className="mb-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                        <input className="form-control"
+                            value={email}
+                            name="email"
+                            onChange={handleInputChange}
+                            onBlur={checkEmail}
+                            type="email"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">Content</label>
+                        <textarea className="form-control" rows="5"
+                            value={content}
+                            name="content"
+                            onChange={handleInputChange}
+                            onBlur={checkEmptyInput}
+                            type="text"
+                        ></textarea>
+                    </div>
+                    {errorMessage && (
+                        <div>
+                            <p className="error-text">{errorMessage}</p>
+                        </div>
+                    )}
+                    <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                </form>
+            </div>
+            <Footer />
+        </>
     );
 }
