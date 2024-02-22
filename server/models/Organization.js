@@ -8,6 +8,12 @@ const organizationSchema = new Schema({
         required: true,
         trim: true
     },
+    address: {
+        type: String,
+    },
+    contact: {
+        type: String,
+    },
     members: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
