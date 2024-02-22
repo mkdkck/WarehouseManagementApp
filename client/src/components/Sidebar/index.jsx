@@ -23,7 +23,11 @@ function Sidebar() {
                     <ul className="menu bg-base-200 w-56 rounded-box">
                         <li><a>Home</a></li>
                         <li>
+                            {/* <Link
+                                to='/Warehouse'> */}
                             Warehouse
+                            {/* </Link> */}
+
                         </li>
                         <li>
                             <details open>
@@ -39,7 +43,7 @@ function Sidebar() {
                                 <summary>Reports</summary>
                                 <ul className='ms-5'>
                                     <li><a>Stock Lists</a></li>
-                                    <li><a>Package Configuration</a></li>
+                                    <li><a>View Package Configuration</a></li>
                                 </ul>
                             </details>
                         </li>
@@ -48,7 +52,7 @@ function Sidebar() {
                 <div>
                     <ul>
                         <li>
-                            Organization
+                            Organization Settings
                         </li>
                         <li>
                             <button onClick={logout}>

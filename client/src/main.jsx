@@ -16,6 +16,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import TC from './pages/T&C'
 import Privacy from './pages/Privacy'
+import Warehouse from './pages/Warehouse'
+import Product from './pages/Product.jsx'
+import Organization from './pages/Organization'
+import PkConfig from './pages/PkConfig'
+
+
 
 
 const router = createBrowserRouter([
@@ -41,7 +47,7 @@ const router = createBrowserRouter([
         element: Auth.loggedIn() ? <Navigate to='/Home' /> : <Login />
       }, {
         path: '/Signup',
-        element: <Signup />
+        element: Auth.loggedIn() ? <Navigate to='/Home' /> : <Signup />
       }, {
         path: '/Privacy',
         element: <Privacy />
@@ -51,7 +57,19 @@ const router = createBrowserRouter([
       }, {
         path: '/Home',
         element: Auth.loggedIn() ? <Home /> : <Navigate to='/Login' />
-      },
+      }, {
+        path: '/Warehouse',
+        element: Auth.loggedIn() ? <Warehouse /> : <Navigate to='/Login' />
+      }, {
+        path: '/Product',
+        element: Auth.loggedIn() ? <Product /> : <Navigate to='/Login' />
+      }, {
+        path: '/Organization',
+        element: Auth.loggedIn() ? <Organization /> : <Navigate to='/Login' />
+      }, {
+        path: '/PkConfig',
+        element: Auth.loggedIn() ? <PkConfig /> : <Navigate to='/Login' />
+      }
     ]
   }
 ]);
