@@ -1,12 +1,15 @@
-import { Navigate } from 'react-router-dom';
 import Auth from '../utils/auth'
 import Sidebar from '../components/Sidebar'
 
-const Warehouse = () => {
+
+const Warehouse = (props) => {
 
     return (
-        <div className='p-6 h-screen'>
+        <div className='p-6 h-screen flex flex-row'>
             <Sidebar />
+            <div className='flex flex-col w-full h-20 bg-grey-600'>
+                Warehouse
+            </div>
 
         </div>
     );

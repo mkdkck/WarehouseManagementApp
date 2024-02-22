@@ -23,18 +23,40 @@ function Sidebar() {
                     <ul className="menu bg-base-200 w-56 rounded-box">
                         <li><a>Home</a></li>
                         <li>
-                            {/* <Link
-                                to='/Warehouse'> */}
-                            Warehouse
-                            {/* </Link> */}
-
+                            <details open>
+                                <summary>Warehouse</summary>
+                                <ul className='ms-5'>
+                                    <li>
+                                        <Link
+                                            to='/Warehouse'
+                                        >
+                                            Add new
+                                        </Link></li>
+                                    <li>
+                                        <Link
+                                            to='/Warehouse'
+                                        >
+                                            View all
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </details>
                         </li>
                         <li>
                             <details open>
                                 <summary>Product</summary>
                                 <ul className='ms-5'>
-                                    <li><a>View Products</a></li>
-                                    <li><a>Package Configuration</a></li>
+                                    <li>
+                                        <Link
+                                            to='/Product'>
+                                            Add Products
+                                        </Link></li>
+                                    <li>
+                                        <Link
+                                            to='/PkConfig'>
+                                            New package config
+                                        </Link>
+                                    </li>
                                 </ul>
                             </details>
                         </li>
@@ -42,7 +64,12 @@ function Sidebar() {
                             <details open>
                                 <summary>Reports</summary>
                                 <ul className='ms-5'>
-                                    <li><a>Stock Lists</a></li>
+                                    <li>
+                                        <Link
+                                            to='/Product'>
+                                            Stock Lists
+                                        </Link>
+                                    </li>
                                     <li><a>View Package Configuration</a></li>
                                 </ul>
                             </details>
@@ -61,7 +88,7 @@ function Sidebar() {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div >
         </>
     );
 }
