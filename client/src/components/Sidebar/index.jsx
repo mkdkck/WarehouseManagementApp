@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth'
-import { useState } from 'react';
 
 function Sidebar() {
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
     }
+    const { data } = Auth.getProfile()
+    console.log(data)
 
     return (
         <>
@@ -15,7 +16,7 @@ function Sidebar() {
                     <div className="flex items-center p-3 space-x-4 mt-3 mb-5">
                         <img src="https://placehold.co/600x400" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
                         <div>
-                            <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
+                            <h2 className="text-lg font-semibold">{data.username}</h2>
                             <span className="flex items-center space-x-1">
                                 <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">View profile</a>
                             </span>
