@@ -21,6 +21,24 @@ export const ADD_USER = gql`
       }
     }
 `
+export const ADD_WAREHOUSE = gql`
+  mutation addWarehouse(
+    name:$String!,
+    location:$String,
+    contactNumber:$String){  
+      addWarehouse(
+        name:$name,
+        location:$location,
+        contactNumber:$contactNumber,
+      ){
+        _id
+        name
+        location
+        contactNumber
+      }
+    }
+  )
+`
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {

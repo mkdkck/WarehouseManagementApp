@@ -14,6 +14,13 @@ const typeDefs = `
     Members:[User]
   }
 
+  type Warehouse{
+    _id:ID
+    name:String!
+    location:String
+    contactNumber:String
+  }
+
   type Auth {
     token:ID
     user: User
@@ -21,11 +28,13 @@ const typeDefs = `
 
   type Query {
     user: User
+    warehouses:[Warehouse]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!,role:String!,organization:String!): Auth
     login(email: String!, password: String!): Auth
+    addWarehouse(name:String!, location:String, contactNumber:String):Warehouse
   }
 `;
 

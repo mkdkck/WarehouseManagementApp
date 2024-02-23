@@ -3,18 +3,17 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const warehouseSchema = new Schema({
-    warehouseName: {
+    name: {
         type: String,
         required: true,
         trim: true
     },
     location: {
         type: String,
-        required: true,
+
     },
-    contactDetail: {
+    contactNumber: {
         type: String,
-        required: true,
     }
 });
 
