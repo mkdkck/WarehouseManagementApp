@@ -23,21 +23,20 @@ export const ADD_USER = gql`
 `
 export const ADD_WAREHOUSE = gql`
   mutation addWarehouse(
-    name:$String!,
-    location:$String,
-    contactNumber:$String){  
+    $warehouseName:String!,
+    $location:String,
+    $contactNumber:String){  
       addWarehouse(
-        name:$name,
+        warehouseName:$warehouseName,
         location:$location,
         contactNumber:$contactNumber,
       ){
         _id
-        name
+        warehouseName
         location
         contactNumber
       }
     }
-  )
 `
 
 export const LOGIN = gql`

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const warehouseSchema = new Schema({
-    name: {
+    warehouseName: {
         type: String,
         required: true,
         trim: true

@@ -16,7 +16,7 @@ const typeDefs = `
 
   type Warehouse{
     _id:ID
-    name:String!
+    warehouseName:String!
     location:String
     contactNumber:String
   }
@@ -34,7 +34,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!,role:String!,organization:String!): Auth
     login(email: String!, password: String!): Auth
-    addWarehouse(name:String!, location:String, contactNumber:String):Warehouse
+    addWarehouse(warehouseName:String!, location:String, contactNumber:String):Warehouse
   }
 `;
 

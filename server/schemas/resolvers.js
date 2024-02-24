@@ -39,14 +39,15 @@ const resolvers = {
         },
 
         addWarehouse: async (parent, args) => {
-            const warehouse = await Warehouse.findOne({ name: args.name })
+            const warehouse = await Warehouse.findOne({ warehouseName: args.warehouseName })
+
             if (warehouse) {
                 throw new Error('Warehouse with the same name already exists.');
             }
 
             const newWarehouse = await Warehouse.create(args);
 
-            return { newWarehouse };
+            return newWarehouse;
         },
 
         login: async (parent, { email, password }) => {

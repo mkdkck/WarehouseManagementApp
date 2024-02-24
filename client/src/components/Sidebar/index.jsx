@@ -7,7 +7,6 @@ function Sidebar() {
         Auth.logout();
     }
     const { data } = Auth.getProfile()
-    console.log(data)
 
     return (
         <>

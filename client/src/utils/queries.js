@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client';
 
-export const VIEW_ALLWAREHOUSES = gql`
-  query viewAllWarehouses {
-    warehouses(
+export const QUERY_WAREHOUSES = gql`
+{
+    warehouses{
         _id
-        name
+        warehouseName
         location
         contactNumber
-    };
+    }
+}
 `
