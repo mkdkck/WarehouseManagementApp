@@ -6,8 +6,8 @@ import { QUERY_WAREHOUSES } from '../../utils/queries';
 import { Dialog, Transition } from '@headlessui/react'
 
 
-const ModifyWarehouseForm = ({ setShowModifyForm }) => {
-    const [formState, setFormState] = useState({ warehouseName: '', location: '', contactNumber: '' });
+const ModifyWarehouseForm = ({ warehouse, setShowModifyForm }) => {
+    const [formState, setFormState] = useState({ _id: warehouse._id, warehouseName: warehouse.warehouseName, location: warehouse.location, contactNumber: warehouse.contactNumber });
     const [updateWarehouse, { UpdateError }] = useMutation(UPDATE_WAREHOUSE, {
         refetchQueries: [QUERY_WAREHOUSES]
     })
@@ -22,7 +22,7 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
         setShowModifyForm(false)
     }
 
-    const handleFormSubmit = async (event) => {
+    const handleWarehouseUpdate = async (event) => {
         event.preventDefault();
         const mutationResponse = await updateWarehouse({
             variables: { ...formState }
@@ -31,9 +31,22 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
             return
         }
         alert('Warehouse info updated sucessfully')
-        closeModal()
-        setFormState({ warehouseName: '', location: '', contactNumber: '' })
+        setFormState({ _id: '', warehouseName: '', location: '', contactNumber: '' })
     };
+
+    const handleWarehouseDelete = async (event) => {
+        event.preventDefault();
+        const mutationResponse = await removeWarehouse({
+            variables: { _id: warehouse._id }
+        });
+        if (RemoveError) {
+            return
+        }
+        alert('Warehouse info deletedd sucessfully')
+        closeModal()
+        setFormState({ _id: '', warehouseName: '', location: '', contactNumber: '' })
+    };
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -74,7 +87,7 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    New warehouse
+                                    Warehouse Detail
                                 </Dialog.Title>
                                 <form className="mt-2">
                                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -88,6 +101,7 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
                                                     name="warehouseName"
                                                     id="warehouseName"
                                                     autoComplete="warehouse1"
+                                                    placeholder={warehouse.warehouseName}
                                                     onChange={handleChange}
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -104,6 +118,7 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
                                                     name="location"
                                                     id="location"
                                                     autoComplete="Flinders Street"
+                                                    placeholder={warehouse.location}
                                                     onChange={handleChange}
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -120,6 +135,7 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
                                                     name="contactNumber"
                                                     type="contactNumber"
                                                     autoComplete="0412345678"
+                                                    placeholder={warehouse.contactNumber}
                                                     onChange={handleChange}
 
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -132,19 +148,27 @@ const ModifyWarehouseForm = ({ setShowModifyForm }) => {
                                     <button
                                         type="button"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        onClick={closeModal}
+                                        onClick={handleWarehouseUpdate}
                                     >
-                                        Cancel
+                                        Update
                                     </button>
                                     <button
                                         type="button"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        onClick={handleFormSubmit}
+                                        onClick={handleWarehouseDelete}
                                     >
-                                        Creat New
+                                        Delete
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                        onClick={closeModal}
+                                    >
+                                        Cancel
                                     </button>
                                 </div>
                                 {UpdateError && <div>Something went wrong... <p>{UpdateError.message}</p></div>}
+                                {RemoveError && <div>Something went wrong... <p>{RemoveError.message}</p></div>}
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>

@@ -51,9 +51,10 @@ const resolvers = {
         },
 
         updateWarehouse: async (parent, args) => {
+            const { _id, ...updateData } = args
             const warehouse = await Warehouse.findOneAndUpdate(
                 { _id: args._id },
-                { args },
+                updateData,
                 {
                     new: true,
                     runValidators: true,
