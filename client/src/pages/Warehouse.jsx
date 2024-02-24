@@ -1,15 +1,22 @@
 import Sidebar from '../components/Sidebar'
-import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { useState } from 'react';
 import { QUERY_WAREHOUSES } from '../utils/queries';
 import AddNewWarehouses from '../components/NewWarehouseForm'
+import ModifyWarehouseForm from '../components/ModifyWarehouseForm'
 
 const Warehouse = () => {
-    // const [warehouses, setWarehouses] = useState()
+    const [showModifyForm, setShowModifyForm] = useState(false);
+    const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+
     const { loading, data } = useQuery(QUERY_WAREHOUSES)
     let warehouses
     if (data) { warehouses = data.warehouses }
 
+    const openModifyWarehouse = (warehouse) => {
+        setShowModifyForm(true);
+        setSelectedWarehouse(warehouse);
+    };
 
     return (
         <div className='p-6 h-screen flex flex-1'>
@@ -37,7 +44,7 @@ const Warehouse = () => {
                             {loading ? <tbody><tr><td>Loading...</td></tr></tbody> :
                                 warehouses.map((warehouse) => (
                                     <tbody>
-                                        < tr key={warehouse._id} className="hover" >
+                                        < tr key={warehouse._id} className="hover" onClick={() => openModifyWarehouse(warehouse)} >
                                             <td>{warehouse.warehouseName}</td>
                                             <td>{warehouse.location}</td>
                                             <td>{warehouse.contactNumber}</td>
@@ -45,6 +52,7 @@ const Warehouse = () => {
                                     </tbody>
                                 ))}
                         </table>
+                        {showModifyForm && <ModifyWarehouseForm warehouse={selectedWarehouse} setShowModifyForm={setShowModifyForm} />}
 
                         <div className="card-actions justify-end">
                             <div className="join">

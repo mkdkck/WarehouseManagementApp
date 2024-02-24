@@ -35,6 +35,8 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!,role:String!,organization:String!): Auth
     login(email: String!, password: String!): Auth
     addWarehouse(warehouseName:String!, location:String, contactNumber:String):Warehouse
+    updateWarehouse(_id: ID, warehouseName:String, location:String, contactNumber:String):Warehouse
+    removeWarehouse(_id: ID):Warehouse
   }
 `;
 

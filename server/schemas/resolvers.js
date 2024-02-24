@@ -50,6 +50,34 @@ const resolvers = {
             return newWarehouse;
         },
 
+        updateWarehouse: async (parent, args) => {
+            const warehouse = await Warehouse.findOneAndUpdate(
+                { _id: args._id },
+                { args },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!warehouse) {
+                throw new Error('No warehouse found');
+            }
+
+            return warehouse;
+        },
+
+        removeWarehouse: async (parent, args) => {
+            const warehouse = await Warehouse.findOneAndRemove(
+                { _id: args._id });
+
+            if (!warehouse) {
+                throw new Error('No warehouse found');
+            }
+
+            return warehouse;
+        },
+
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
