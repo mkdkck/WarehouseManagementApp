@@ -117,7 +117,7 @@ function Signup() {
                             </Link>
                         </p>
                     </div>
-                    {error && <div>Something went wrong...</div>}
+                    {error && <div>Something went wrong... <p>{error.message}</p></div>}
                 </form>
             </div>
             <Footer />

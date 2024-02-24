@@ -10,11 +10,10 @@ const warehouseSchema = new Schema({
     },
     location: {
         type: String,
-        required: true,
+
     },
-    contactDetail: {
+    contactNumber: {
         type: String,
-        required: true,
     }
 });
 

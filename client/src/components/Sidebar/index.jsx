@@ -7,16 +7,15 @@ function Sidebar() {
         Auth.logout();
     }
     const { data } = Auth.getProfile()
-    console.log(data)
 
     return (
         <>
-            <div className="flex-col flex justify-between h-full p-3 w-60 bg-stone-400 text-gray-800 ">
+            <div className="flex-col flex justify-between h-full p-3 w-1/5 bg-stone-400 text-gray-800 rounded-l-xxl">
                 <div>
                     <div className="flex items-center p-3 space-x-4 mt-3 mb-5">
                         <img src="https://placehold.co/600x400" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
                         <div>
-                            <h2 className="text-xl font-semibold">{data.username}</h2>
+                            <h2 className="text-xl font-bold">{data.username}</h2>
                             <span className="flex items-center space-x-1">
                                 <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">View profile</a>
                             </span>

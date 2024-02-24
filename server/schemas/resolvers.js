@@ -2,13 +2,18 @@ const { User, Organization, Warehouse, Category, PackageConfig, Product } = requ
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
+    Query: {
+        warehouses: async () => {
+            return await Warehouse.find();
+        },
+    },
     Mutation: {
         addUser: async (parent, args) => {
             let organization = await Organization.findOne({ OrgName: args.organization })
             if (!organization) {
                 organization = await Organization.create({ OrgName: args.organization })
             }
-            console.log(organization)
+
             const newUser = {
                 username: args.username,
                 email: args.email,
@@ -18,7 +23,6 @@ const resolvers = {
             }
             const user = await User.create(newUser);
             const token = signToken(user);
-            console.log(user)
 
             await Organization.findOneAndUpdate(
                 { _id: organization._id },
@@ -32,6 +36,47 @@ const resolvers = {
             );
 
             return { token, user };
+        },
+
+        addWarehouse: async (parent, args) => {
+            const warehouse = await Warehouse.findOne({ warehouseName: args.warehouseName })
+
+            if (warehouse) {
+                throw new Error('Warehouse with the same name already exists.');
+            }
+
+            const newWarehouse = await Warehouse.create(args);
+
+            return newWarehouse;
+        },
+
+        updateWarehouse: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const warehouse = await Warehouse.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!warehouse) {
+                throw new Error('No warehouse found');
+            }
+
+            return warehouse;
+        },
+
+        removeWarehouse: async (parent, args) => {
+            const warehouse = await Warehouse.findOneAndRemove(
+                { _id: args._id });
+
+            if (!warehouse) {
+                throw new Error('No warehouse found');
+            }
+
+            return warehouse;
         },
 
         login: async (parent, { email, password }) => {

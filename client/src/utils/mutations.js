@@ -21,6 +21,53 @@ export const ADD_USER = gql`
       }
     }
 `
+export const ADD_WAREHOUSE = gql`
+  mutation addWarehouse(
+    $warehouseName:String!,
+    $location:String,
+    $contactNumber:String){  
+      addWarehouse(
+        warehouseName:$warehouseName,
+        location:$location,
+        contactNumber:$contactNumber,
+      ){
+        _id
+        warehouseName
+        location
+        contactNumber
+      }
+    }
+`
+export const REMOVE_WAREHOUSE = gql`
+  mutation removeWarehouse($_id: ID!) {
+    removeWarehouse(_id: $_id) {
+      _id
+      warehouseName
+      location
+      contactNumber
+    }
+  }
+`;
+
+export const UPDATE_WAREHOUSE = gql`
+  mutation updateWarehouse(
+    $_id: ID!,
+    $warehouseName:String,
+    $location:String,
+    $contactNumber:String) {
+    updateWarehouse(
+      _id: $_id,
+      warehouseName:$warehouseName,
+      location:$location,
+      contactNumber:$contactNumber,) {
+      _id
+      warehouseName
+      location
+      contactNumber
+    }
+  }
+`;
+
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
