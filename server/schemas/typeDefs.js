@@ -21,6 +21,16 @@ const typeDefs = `
     contactNumber:String
   }
 
+  type PkConfig{
+    _id:ID
+    configName: String!
+    itemPerPk: Int!
+    pkPerlayer: Int!
+    layerPerPallet: Int!
+    palletTotalItems: Int
+    palletTotalPks: Int
+  }
+
   type Auth {
     token:ID
     user: User
@@ -29,6 +39,7 @@ const typeDefs = `
   type Query {
     user: User
     warehouses:[Warehouse]
+    pkConfigs:[PkConfig]
   }
 
   type Mutation {
@@ -37,6 +48,9 @@ const typeDefs = `
     addWarehouse(warehouseName:String!, location:String, contactNumber:String):Warehouse
     updateWarehouse(_id: ID!, warehouseName:String, location:String, contactNumber:String):Warehouse
     removeWarehouse(_id: ID!):Warehouse
+    addPkConfig (configName: String!, itemPerPk: Int!, pkPerlayer: Int!, layerPerPallet: Int!):PkConfig
+    updatePkConfig(_id:ID!,configName: String!, itemPerPk: Int!, pkPerlayer: Int!, layerPerPallet: Int!):PkConfig
+    removePkConfig(_id:ID!):PkConfig
   }
 `;
 

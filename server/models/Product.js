@@ -12,9 +12,9 @@ const financeSchema = new Schema({
 })
 
 const productStackSchema = new Schema({
-    packageConfig: {
+    pkConfig: {
         type: Schema.Types.ObjectId,
-        ref: 'PackageConfig',
+        ref: 'PkConfig',
         require: true
     },
     pkQty: {
@@ -52,7 +52,7 @@ const productStackSchema = new Schema({
 )
 
 productStackSchema.virtual('subTotalQty').get(function () {
-    return this.pkQty * this.packageConfig.itemPerPk + this.layerQty * this.packageConfig.pkPerlayer + this.palletQty * this.packageConfig.layerPerPallet;
+    return this.pkQty * this.pkConfig.itemPerPk + this.layerQty * this.pkConfig.pkPerlayer + this.palletQty * this.pkConfig.layerPerPallet;
 });
 
 const productSchema = new Schema({

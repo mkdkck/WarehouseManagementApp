@@ -3,10 +3,10 @@ const Organization = require('./Organization');
 const Category = require('./Category');
 const Product = require('./Product');
 const Warehouse = require('./Warehouse');
-const PackageConfig = require('./PackageConfig');
+const PkConfig = require('./PkConfig');
 
 
 
 module.exports = {
-    User, Organization, Warehouse, Category, PackageConfig, Product
+    User, Organization, Warehouse, Category, PkConfig, Product
 };
