@@ -10,7 +10,7 @@ const Warehouse = () => {
     const [selectedWarehouse, setSelectedWarehouse] = useState(null);
 
     const { loading, data } = useQuery(QUERY_WAREHOUSES)
-    let warehouses
+    let warehouses = []
     if (data) { warehouses = data.warehouses }
 
     const openModifyWarehouse = (warehouse) => {
@@ -32,6 +32,7 @@ const Warehouse = () => {
                 <div className="card m-10 bg-grey-100 shadow-xl">
                     <div className="card-body">
                         <h2 className="card-title">Warehouse list</h2>
+                        <h4>click list to view more and edit</h4>
 
                         <table className="table">
                             <thead>

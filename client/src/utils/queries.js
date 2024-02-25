@@ -10,3 +10,17 @@ export const QUERY_WAREHOUSES = gql`
     }
 }
 `
+
+export const QUERY_PKCONFIGS = gql`
+{
+    pkConfigs{
+        _id
+        configName
+        itemPerPk
+        pkPerlayer
+        layerPerPallet
+        palletTotalItems
+        palletTotalPks
+    }
+}
+`

@@ -1,4 +1,4 @@
-const { User, Organization, Warehouse, Category, PackageConfig, Product } = require('../models');
+const { User, Organization, Warehouse, Category, PkConfig, Product } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -6,7 +6,11 @@ const resolvers = {
         warehouses: async () => {
             return await Warehouse.find();
         },
+        pkConfigs: async () => {
+            return await PkConfig.find();
+        },
     },
+
     Mutation: {
         addUser: async (parent, args) => {
             let organization = await Organization.findOne({ OrgName: args.organization })
@@ -77,6 +81,47 @@ const resolvers = {
             }
 
             return warehouse;
+        },
+
+        addPkConfig: async (parent, args) => {
+            const pkConfig = await PkConfig.findOne({ configName: args.configName })
+
+            if (pkConfig) {
+                throw new Error('Configuration with the same name already exists.');
+            }
+
+            const newPkConfig = await PkConfig.create(args);
+
+            return newPkConfig;
+        },
+
+        updatePkConfig: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const pkConfig = await PkConfig.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!pkConfig) {
+                throw new Error('No configuration found');
+            }
+
+            return pkConfig;
+        },
+
+        removePkConfig: async (parent, args) => {
+            const pkConfig = await PkConfig.findOneAndRemove(
+                { _id: args._id });
+
+            if (!pkConfig) {
+                throw new Error('No package configuration found');
+            }
+
+            return pkConfig;
         },
 
         login: async (parent, { email, password }) => {

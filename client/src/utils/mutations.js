@@ -69,6 +69,62 @@ export const UPDATE_WAREHOUSE = gql`
 `;
 
 
+export const ADD_PKCONFIG = gql`
+  mutation addPkConfig(
+    $configName: String!
+    $itemPerPk: Int!
+    $pkPerlayer: Int!
+    $layerPerPallet: Int!){  
+      addPkConfig(
+        configName: $configName
+        itemPerPk: $itemPerPk
+        pkPerlayer: $pkPerlayer
+        layerPerPallet: $layerPerPallet
+      ){
+        _id
+        configName
+        itemPerPk
+        pkPerlayer
+        layerPerPallet
+        palletTotalItems
+        palletTotalPks
+      }
+    }
+`
+export const REMOVE_PKCONFIG = gql`
+  mutation removePkConfig($_id: ID!) {
+    removePkConfig(_id: $_id) {
+      _id
+      configName
+    }
+  }
+`;
+
+export const UPDATE_PKCONFIG = gql`
+  mutation updatePkConfig(
+    $_id:ID!
+    $configName: String!
+    $itemPerPk: Int!
+    $pkPerlayer: Int!
+    $layerPerPallet: Int!) {
+    updatePkConfig(
+      _id: $_id,
+      configName: $configName
+      itemPerPk: $itemPerPk
+      pkPerlayer: $pkPerlayer
+      layerPerPallet: $layerPerPallet) {
+        _id
+        configName
+        itemPerPk
+        pkPerlayer
+        layerPerPallet
+        palletTotalItems
+        palletTotalPks
+    }
+  }
+`;
+
+
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

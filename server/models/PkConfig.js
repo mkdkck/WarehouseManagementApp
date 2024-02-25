@@ -13,19 +13,22 @@ const pkConfigSchema = new Schema(
             type: Number,
             required: true,
             default: 1,
-            min: 1
+            min: 1,
+            max: 100
         },
         pkPerlayer: {
             type: Number,
             required: true,
             default: 1,
-            min: 1
+            min: 1,
+            max: 50
         },
         layerPerPallet: {
             type: Number,
             required: true,
             default: 1,
-            min: 1
+            min: 1,
+            max: 10
         }
     },
     {
@@ -44,6 +47,6 @@ pkConfigSchema.virtual('palletTotalPks').get(function () {
     return this.pkPerlayer * this.layerPerPallet;
 });
 
-const PackageConfig = model('PackageConfig', pkConfigSchema);
+const PkConfig = model('PkConfig', pkConfigSchema);
 
-module.exports = PackageConfig;
+module.exports = PkConfig;

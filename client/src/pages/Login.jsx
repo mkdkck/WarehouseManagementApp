@@ -54,7 +54,7 @@ function Login() {
                                 type="email"
                                 name="email"
                                 id="email"
-                                placeholder="john@gmail.com"
+                                placeholder="john@mail.com"
                                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                                 onChange={handleInputChange} />
                         </div>

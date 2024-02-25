@@ -1,15 +1,15 @@
 import React from 'react'
 import { useState, Fragment } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_WAREHOUSE } from '../../utils/mutations';
-import { QUERY_WAREHOUSES } from '../../utils/queries';
+import { ADD_PKCONFIG } from '../../utils/mutations';
+import { QUERY_PKCONFIGS } from '../../utils/queries';
 import { Dialog, Transition } from '@headlessui/react'
 
 
-const NewWarehouseForm = () => {
-    const [formState, setFormState] = useState({ warehouseName: '', location: '', contactNumber: '' });
-    const [addWarehouse, { error }] = useMutation(ADD_WAREHOUSE, {
-        refetchQueries: [QUERY_WAREHOUSES]
+const NewPkConfig = () => {
+    const [formState, setFormState] = useState({ configName: '', itemPerPk: '1', pkPerlayer: '1', layerPerPallet: '1' });
+    const [addPkConfig, { error }] = useMutation(ADD_PKCONFIG, {
+        refetchQueries: [QUERY_PKCONFIGS]
     })
     const [isOpen, setIsOpen] = useState(false)
 
@@ -23,15 +23,24 @@ const NewWarehouseForm = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const mutationResponse = await addWarehouse({
-            variables: { ...formState }
+        const itemPerPkInt = parseInt(formState.itemPerPk, 10);
+        const pkPerlayerInt = parseInt(formState.pkPerlayer, 10);
+        const layerPerPalletInt = parseInt(formState.layerPerPallet, 10);
+
+        const mutationResponse = await addPkConfig({
+            variables: {
+                configName: formState.configName,
+                itemPerPk: itemPerPkInt,
+                pkPerlayer: pkPerlayerInt,
+                layerPerPallet: layerPerPalletInt
+            }
         });
         if (error) {
             return
         }
-        alert('A new warehouse created sucessfully')
+        alert('A new package configuration created sucessfully')
         closeModal()
-        setFormState({ warehouseName: '', location: '', contactNumber: '' })
+        setFormState({ configName: '', itemPerPk: '1', pkPerlayer: '1', layerPerPallet: '1' })
     };
 
     const handleChange = (event) => {
@@ -50,7 +59,7 @@ const NewWarehouseForm = () => {
                     onClick={openModal}
                     className="rounded-xxl mt-5 w-4/5 bg-amber-300 px-4 py-2 text-sm font-medium text-black hover:bg-amber-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                 >
-                    Add a new warehouse
+                    Add a new package configuration
                 </button>
             </div>
 
@@ -84,20 +93,20 @@ const NewWarehouseForm = () => {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        New warehouse
+                                        New package configuration
                                     </Dialog.Title>
                                     <form className="mt-2">
                                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                             <div className="sm:col-span-5">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Warehouse name
+                                                    Configuration name
                                                 </label>
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        name="warehouseName"
-                                                        id="warehouseName"
-                                                        autoComplete="warehouse1"
+                                                        name="configName"
+                                                        id="configName"
+                                                        autoComplete="config 1"
                                                         onChange={handleChange}
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     />
@@ -106,14 +115,14 @@ const NewWarehouseForm = () => {
 
                                             <div className="sm:col-span-5">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Location
+                                                    Item(s) in a package
                                                 </label>
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        name="location"
-                                                        id="location"
-                                                        autoComplete="Flinders Street"
+                                                        name="itemPerPk"
+                                                        id="itemPerPk"
+                                                        autoComplete="1"
                                                         onChange={handleChange}
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     />
@@ -122,14 +131,31 @@ const NewWarehouseForm = () => {
 
                                             <div className="sm:col-span-5">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Warehouse Contact
+                                                    Package(s) on a layer
                                                 </label>
                                                 <div className="mt-2">
                                                     <input
-                                                        id="text"
-                                                        name="contactNumber"
-                                                        type="contactNumber"
-                                                        autoComplete="0412345678"
+                                                        id="pkPerlayer"
+                                                        name="pkPerlayer"
+                                                        type="number"
+                                                        autoComplete="1"
+                                                        onChange={handleChange}
+
+                                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-5">
+                                                <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                    Layer(s) in a pallet
+                                                </label>
+                                                <div className="mt-2">
+                                                    <input
+                                                        id="layerPerPallet"
+                                                        name="layerPerPallet"
+                                                        type="number"
+                                                        autoComplete="1"
                                                         onChange={handleChange}
 
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -155,7 +181,7 @@ const NewWarehouseForm = () => {
                                         </button>
 
                                     </div>
-                                    {error && <div>Error adding warehouse info... <p>{error.message}</p></div>}
+                                    {error && <div>Error adding package configuration... <p>{error.message}</p></div>}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -166,4 +192,4 @@ const NewWarehouseForm = () => {
     )
 }
 
-export default NewWarehouseForm;
+export default NewPkConfig;
