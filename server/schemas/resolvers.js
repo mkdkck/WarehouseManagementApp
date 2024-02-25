@@ -9,6 +9,9 @@ const resolvers = {
         pkConfigs: async () => {
             return await PkConfig.find();
         },
+        categories: async () => {
+            return await Category.find().populate('products');
+        },
     },
 
     Mutation: {
@@ -122,6 +125,47 @@ const resolvers = {
             }
 
             return pkConfig;
+        },
+
+        addCategory: async (parent, args) => {
+            const category = await Category.findOne({ name: args.name })
+
+            if (category) {
+                throw new Error('Category with the same name already exists.');
+            }
+
+            const newCategory = await Category.create(args);
+
+            return newCategory;
+        },
+
+        updateCategory: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const category = await Category.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!category) {
+                throw new Error('No category found');
+            }
+
+            return category;
+        },
+
+        removeCategory: async (parent, args) => {
+            const category = await Category.findOneAndRemove(
+                { _id: args._id });
+
+            if (!category) {
+                throw new Error('No package configuration found');
+            }
+
+            return category;
         },
 
         login: async (parent, { email, password }) => {
