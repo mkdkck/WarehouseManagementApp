@@ -30,7 +30,13 @@ export const QUERY_CATEGORIES = gql`
     categories{
         _id
         name
-        products
+        products{
+            _id
+            name
+            description
+            owner
+            totalQty
+        }
         productCount
     }
 }

@@ -244,7 +244,7 @@ const resolvers = {
             return productStack;
         },
 
-        removeProducStackt: async (parent, args) => {
+        removeProductStack: async (parent, args) => {
             const productStack = await Product.findOneAndRemove(
                 { productStacks: { _id: args._id } });
 

@@ -55,7 +55,7 @@ const typeDefs = `
     description: String
     image: String
     productStacks:[ProductStackSchema]
-    categories:[ID]!
+    categories:[ID]
     owner: String
     totalQty: Int
   }
@@ -89,8 +89,8 @@ const typeDefs = `
     updateCategory(_id:ID!,name: String!, products:ID):Category
     removeCategory(_id:ID!):Category
 
-    addProduct(name: String!, description: String, image: String, categories:[ID]!, owner: String):Product
-    updateProduct(_id:ID!, name: String!, description: String, image: String, categories:[ID]!, owner: String):Product
+    addProduct(name: String!, description: String, image: String, categories:[ID], owner: String):Product
+    updateProduct(_id:ID!, name: String!, description: String, image: String, categories:[ID], owner: String):Product
     removeProduct(_id:ID!):Product
 
     addProductStack(pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product

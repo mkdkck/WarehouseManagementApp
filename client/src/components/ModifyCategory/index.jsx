@@ -1,24 +1,22 @@
 import React from 'react'
 import { useState, Fragment } from 'react';
 import { useMutation } from '@apollo/client';
-import { UPDATE_PKCONFIG, REMOVE_PKCONFIG } from '../../utils/mutations';
-import { QUERY_PKCONFIGS } from '../../utils/queries';
+import { UPDATE_CATEGORY, REMOVE_CATEGORY } from '../../utils/mutations';
+import { QUERY_CATEGORIES } from '../../utils/queries';
 import { Dialog, Transition } from '@headlessui/react'
 
 
-const ModifyPkConfig = ({ pkConfig, setShowModifyForm }) => {
+const ModifyCategory = ({ category, setShowModifyForm }) => {
     const [formState, setFormState] = useState({
-        _id: pkConfig._id,
-        configName: pkConfig.configName,
-        itemPerPk: pkConfig.itemPerPk,
-        pkPerlayer: pkConfig.pkPerlayer,
-        layerPerPallet: pkConfig.layerPerPallet
+        _id: category._id,
+        name: category.name,
+        products: category.products
     });
-    const [updatePkConfig, { UpdateError }] = useMutation(UPDATE_PKCONFIG, {
-        refetchQueries: [QUERY_PKCONFIGS]
+    const [updateCategory, { UpdateError }] = useMutation(UPDATE_CATEGORY, {
+        refetchQueries: [QUERY_CATEGORIES]
     })
-    const [removePkConfig, { RemoveError }] = useMutation(REMOVE_PKCONFIG, {
-        refetchQueries: [QUERY_PKCONFIGS]
+    const [removeCategory, { RemoveError }] = useMutation(REMOVE_CATEGORY, {
+        refetchQueries: [QUERY_CATEGORIES]
     })
 
     const [isOpen, setIsOpen] = useState(true)
@@ -30,24 +28,15 @@ const ModifyPkConfig = ({ pkConfig, setShowModifyForm }) => {
 
     const handlePkConfigUpdate = async (event) => {
         event.preventDefault();
-        const itemPerPkInt = parseInt(formState.itemPerPk, 10);
-        const pkPerlayerInt = parseInt(formState.pkPerlayer, 10);
-        const layerPerPalletInt = parseInt(formState.layerPerPallet, 10);
 
         const mutationResponse = await updatePkConfig({
-            variables: {
-                _id: pkConfig._id,
-                configName: formState.configName,
-                itemPerPk: itemPerPkInt,
-                pkPerlayer: pkPerlayerInt,
-                layerPerPallet: layerPerPalletInt
-            }
+            variables: { ...formState }
         });
         if (UpdateError) {
             return
         }
-        alert('Package configuration updated sucessfully')
-        setFormState({ _id: '', configName: '', itemPerPk: '1', pkPerlayer: '1', layerPerPallet: '1' })
+        alert('Category updated sucessfully')
+        setFormState({ _id: '', name: '', products: [] })
     };
 
     const handlePkConfigDelete = async (event) => {
@@ -212,4 +201,4 @@ const ModifyPkConfig = ({ pkConfig, setShowModifyForm }) => {
     )
 }
 
-export default ModifyPkConfig;
+export default ModifyCategory;

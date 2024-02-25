@@ -22,7 +22,7 @@ const categorySchema = new Schema(
     }
 );
 
-categorySchema.virtual('ProductCount').get(function () {
+categorySchema.virtual('productCount').get(function () {
     return this.products.length;
 });
 

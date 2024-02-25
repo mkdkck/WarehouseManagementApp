@@ -171,7 +171,7 @@ export const ADD_PRODUCT = gql`
     $name: String!
     $description: String
     $image: String
-    $categories:[ID]!
+    $categories:[ID]
     $owner: String){  
       addProduct(
         name: $name
@@ -204,7 +204,7 @@ export const UPDATE_PRODUCT = gql`
     $name: String!
     $description: String
     $image: String
-    $categories:[ID]!
+    $categories:[ID]
     $owner: String){
       updateProduct(
       _id: $_id,
@@ -268,12 +268,12 @@ export const UPDATE_PRODUCTSTACK = gql`
     $warehouses: [ID]!,
     $zoneCode: String){
     updateProductStack(
-      pkConfig
-      pkQty
-      layerQty
-      palletQty
-      warehouses
-      zoneCode
+      pkConfig:$pkConfig
+      pkQty:$pkQty
+      layerQty:$layerQty
+      palletQty:$palletQty
+      warehouses:$warehouses
+      zoneCode:$zoneCode
       ){
         _id
         pkConfig

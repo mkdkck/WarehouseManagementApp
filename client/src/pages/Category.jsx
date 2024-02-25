@@ -2,8 +2,8 @@ import Sidebar from '../components/Sidebar'
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { QUERY_CATEGORIES } from '../utils/queries';
-import NewPkConfig from '../components/NewCategory'
-import ModifyPkConfig from '../components/ModifyCategory'
+import NewCategory from '../components/NewCategory'
+import ModifyCategory from '../components/ModifyCategory'
 
 const Category = () => {
     const [showModifyForm, setShowModifyForm] = useState(false);
@@ -12,6 +12,7 @@ const Category = () => {
     const { loading, data } = useQuery(QUERY_CATEGORIES)
     let categories = []
     if (data) { categories = data.categories }
+    console
 
 
     const openModifyCategory = (category) => {
@@ -28,7 +29,7 @@ const Category = () => {
                 </div>
 
                 {/* Add a new warehouse function */}
-                <NewPkConfig />
+                <NewCategory />
 
                 <div className="card m-10 bg-grey-100 shadow-xl">
                     <div className="card-body">
@@ -47,7 +48,7 @@ const Category = () => {
                                 categories.map((category) => (
                                     <tbody>
                                         < tr key={category._id} className="hover" onClick={() => openModifyCategory(category)} >
-                                            <td>{category.configName}</td>
+                                            <td>{category.name}</td>
                                             <td>{category.productCount}</td>
                                         </tr>
                                     </tbody>

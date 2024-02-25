@@ -59,11 +59,12 @@ const productSchema = new Schema({
         type: String
     },
     productStacks: [productStackSchema],
-    categories: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        required: true
-    }],
+    categories: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Category',
+        }
+    ],
     owner: {
         type: String,
     }
