@@ -27,13 +27,11 @@ export const QUERY_PKCONFIGS = gql`
 
 export const QUERY_CATEGORIES = gql`
 {
-    pkConfigs{
+    categories{
         _id
-        configName
-        itemPerPk
-        pkPerlayer
-        layerPerPallet
-        palletTotalItems
-        palletTotalPks
+        name
+        products
+        productCount
     }
 }
+`

@@ -34,7 +34,6 @@ const typeDefs = `
   type Category{
     _id:ID
     name: String!
-    customFields:[customFieldSchema]!
     products: [Product]
     productCount: Int
   }
