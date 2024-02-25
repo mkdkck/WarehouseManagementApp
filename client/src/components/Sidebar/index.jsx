@@ -56,7 +56,7 @@ function Sidebar() {
                                     <li>
                                         <Link
                                             to='/PkConfig'>
-                                            Mange package config
+                                            Manage package config
                                         </Link>
                                     </li>
                                 </ul>

@@ -55,6 +55,30 @@ productStackSchema.virtual('subTotalQty').get(function () {
     return this.pkQty * this.pkConfig.itemPerPk + this.layerQty * this.pkConfig.pkPerlayer + this.palletQty * this.pkConfig.layerPerPallet;
 });
 
+const customFieldSchema = new Schema(
+    {
+        name: {
+            type: Schema.Types.ObjectId,
+            ref: 'Category',
+            required: true,
+            trim: true
+        },
+
+        customFields: [{
+            fieldName: {
+                type: Schema.Types.ObjectId,
+                ref: 'Category',
+                required: true,
+            },
+            fieldValue: {
+                type: String,
+                required: true,
+                trim: true
+            },
+        }],
+    }
+)
+
 const productSchema = new Schema({
     name: {
         type: String,
@@ -68,11 +92,7 @@ const productSchema = new Schema({
         type: String
     },
     productStack: [productStackSchema],
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        required: true
-    },
+    categoryFiled: [customFieldSchema],
     finance: [financeSchema],
     owner: {
         type: String,

@@ -9,6 +9,9 @@ const resolvers = {
         pkConfigs: async () => {
             return await PkConfig.find();
         },
+        categories: async () => {
+            return await Category.find().populate('products');
+        },
     },
 
     Mutation: {
@@ -41,6 +44,8 @@ const resolvers = {
 
             return { token, user };
         },
+
+
 
         addWarehouse: async (parent, args) => {
             const warehouse = await Warehouse.findOne({ warehouseName: args.warehouseName })
@@ -83,6 +88,8 @@ const resolvers = {
             return warehouse;
         },
 
+
+
         addPkConfig: async (parent, args) => {
             const pkConfig = await PkConfig.findOne({ configName: args.configName })
 
@@ -122,6 +129,89 @@ const resolvers = {
             }
 
             return pkConfig;
+        },
+
+
+        addFieldName: async (parent, fieldName) => {
+            const existsFieldName = await Category.findOne({ customFields: { fieldName: fieldName } })
+
+            if (existsFieldName) {
+                throw new Error('Field with the same name already exists.');
+            }
+
+            const newFieldName = await Category.create({ customFields: { fieldName: fieldName } });
+
+            return newFieldName;
+        },
+
+        updateFieldName: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const fieldName = await Category.findOneAndUpdate(
+                { customFields: { _id: args._id } },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!fieldName) {
+                throw new Error('No field found');
+            }
+
+            return fieldName;
+        },
+
+        removeFieldName: async (parent, args) => {
+            const fieldName = await Category.findOneAndRemove(
+                { customFields: { _id: args._id } });
+
+            if (!fieldName) {
+                throw new Error('No field found');
+            }
+
+            return fieldName;
+        },
+
+        addCategory: async (parent, args) => {
+            const category = await Category.findOne({ name: args.name })
+
+            if (category) {
+                throw new Error('Category with the same name already exists.');
+            }
+
+            const newCategory = await Category.create(args);
+
+            return newCategory;
+        },
+
+        updateCategory: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const category = await Category.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!category) {
+                throw new Error('No category found');
+            }
+
+            return category;
+        },
+
+        removeCategory: async (parent, args) => {
+            const category = await Category.findOneAndRemove(
+                { _id: args._id });
+
+            if (!category) {
+                throw new Error('No package configuration found');
+            }
+
+            return category;
         },
 
         login: async (parent, { email, password }) => {

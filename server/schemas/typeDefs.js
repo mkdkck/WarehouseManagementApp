@@ -31,6 +31,19 @@ const typeDefs = `
     palletTotalPks: Int
   }
 
+  type customFieldSchema{
+    _id:ID
+    fieldName:String
+  }
+
+  type Category{
+    _id:ID
+    name: String!
+    customFields:[customFieldSchema]!
+    products: [Product]
+    productCount: Int
+  }
+
   type Auth {
     token:ID
     user: User
@@ -40,17 +53,28 @@ const typeDefs = `
     user: User
     warehouses:[Warehouse]
     pkConfigs:[PkConfig]
+    categories:[Category]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!,role:String!,organization:String!): Auth
     login(email: String!, password: String!): Auth
+
     addWarehouse(warehouseName:String!, location:String, contactNumber:String):Warehouse
     updateWarehouse(_id: ID!, warehouseName:String, location:String, contactNumber:String):Warehouse
     removeWarehouse(_id: ID!):Warehouse
+
     addPkConfig (configName: String!, itemPerPk: Int!, pkPerlayer: Int!, layerPerPallet: Int!):PkConfig
     updatePkConfig(_id:ID!,configName: String!, itemPerPk: Int!, pkPerlayer: Int!, layerPerPallet: Int!):PkConfig
     removePkConfig(_id:ID!):PkConfig
+
+    addFieldName(fieldName:String!):Category
+    updateFieldName(_id:ID!,fieldName:String!):Category
+    removeFieldName(_id:ID!):Category
+
+    addCategory(name: String!,customFields: [ID]!,products:[ID]):Category
+    updateCategory(_id:ID!,name: String!, products:ID):Category
+    removeCategory(_id:ID!):Category
   }
 `;
 
