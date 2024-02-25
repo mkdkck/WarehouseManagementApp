@@ -124,6 +124,51 @@ export const UPDATE_PKCONFIG = gql`
   }
 `;
 
+export const ADD_CATEGORY = gql`
+  mutation addCategory(
+    $name: String!
+    $products: [ID]){  
+      addCategory(
+        name: $name
+        products: $products
+      ){
+        _id
+        name
+        products{
+          _id
+          name
+        }
+      }
+    }
+`
+export const REMOVE_CATEGORY = gql`
+  mutation removeCategory($_id: ID!) {
+    removeCategory(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_CATEGORY = gql`
+  mutation updateCategory(
+    $_id:ID!
+    $name: String!
+    $products: [ID]){
+    updateCategory(
+      _id: $_id,
+      name: $name
+        products: $products
+      ){
+        _id
+        name
+        products{
+          _id
+          name
+        }
+      }
+  }
+`;
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {

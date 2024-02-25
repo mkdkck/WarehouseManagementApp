@@ -54,7 +54,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!,role:String!,organization:String!): Auth
     login(email: String!, password: String!): Auth
-    
+
     addWarehouse(warehouseName:String!, location:String, contactNumber:String):Warehouse
     updateWarehouse(_id: ID!, warehouseName:String, location:String, contactNumber:String):Warehouse
     removeWarehouse(_id: ID!):Warehouse
@@ -63,7 +63,7 @@ const typeDefs = `
     updatePkConfig(_id:ID!,configName: String!, itemPerPk: Int!, pkPerlayer: Int!, layerPerPallet: Int!):PkConfig
     removePkConfig(_id:ID!):PkConfig
 
-    addCategory(name: String!,customFields: [ID]!,products:[ID]):Category
+    addCategory(name: String!,products:[ID]):Category
     updateCategory(_id:ID!,name: String!, products:ID):Category
     removeCategory(_id:ID!):Category
   }
