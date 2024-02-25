@@ -38,15 +38,9 @@ const typeDefs = `
     productCount: Int
   }
 
-  type FinanceSchema{
-    _id:ID
-    rrp:Float
-    cost: Float
-  }
-
   type ProductStackSchema{
     _id:ID
-    pkConfig: Int!
+    pkConfig: ID!
     pkQty: Int!
     layerQty: Int!
     palletQty: Int!
@@ -62,7 +56,6 @@ const typeDefs = `
     image: String
     productStacks:[ProductStackSchema]
     categories:[ID]!
-    finance: FinanceSchema
     owner: String
     totalQty: Int
   }
@@ -96,8 +89,12 @@ const typeDefs = `
     updateCategory(_id:ID!,name: String!, products:ID):Category
     removeCategory(_id:ID!):Category
 
-    addProduct(name: String!,products:[ID]):Product
-    updateProduct(_id:ID!,name: String!, products:ID):Product
+    addProduct(name: String!, description: String, image: String, categories:[ID]!, owner: String):Product
+    updateProduct(_id:ID!, name: String!, description: String, image: String, categories:[ID]!, owner: String):Product
+    removeProduct(_id:ID!):Product
+
+    addProductStack(pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
+    updateProduct(_id:ID!,pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
     removeProduct(_id:ID!):Products
   }
 `;

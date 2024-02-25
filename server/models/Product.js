@@ -2,15 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const financeSchema = new Schema({
-    rrp: {
-        type: Number,
-    },
-    cost: {
-        type: Number,
-    }
-})
-
 const productStackSchema = new Schema({
     pkConfig: {
         type: Schema.Types.ObjectId,
@@ -73,7 +64,6 @@ const productSchema = new Schema({
         ref: 'Category',
         required: true
     }],
-    finance: [financeSchema],
     owner: {
         type: String,
     }
