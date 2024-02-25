@@ -54,7 +54,7 @@ const Category = () => {
                                     </tbody>
                                 ))}
                         </table>
-                        {showModifyForm && <ModifyPkConfig category={selectedCategory} setShowModifyForm={setShowModifyForm} />}
+                        {showModifyForm && <ModifyCategory category={selectedCategory} setShowModifyForm={setShowModifyForm} />}
 
                         <div className="card-actions justify-end">
                             <div className="join">

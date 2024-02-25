@@ -26,10 +26,10 @@ const ModifyCategory = ({ category, setShowModifyForm }) => {
         setShowModifyForm(false)
     }
 
-    const handlePkConfigUpdate = async (event) => {
+    const handleCategoryUpdate = async (event) => {
         event.preventDefault();
 
-        const mutationResponse = await updatePkConfig({
+        const mutationResponse = await updateCategory({
             variables: { ...formState }
         });
         if (UpdateError) {
@@ -39,17 +39,17 @@ const ModifyCategory = ({ category, setShowModifyForm }) => {
         setFormState({ _id: '', name: '', products: [] })
     };
 
-    const handlePkConfigDelete = async (event) => {
+    const handleCategoryDelete = async (event) => {
         event.preventDefault();
-        const mutationResponse = await removePkConfig({
-            variables: { _id: pkConfig._id }
+        const mutationResponse = await removeCategory({
+            variables: { _id: category._id }
         });
         if (RemoveError) {
             return
         }
-        alert('Package configuration deleted sucessfully')
+        alert('Category deleted sucessfully')
         closeModal()
-        setFormState({ _id: '', configName: '', itemPerPk: '1', pkPerlayer: '1', layerPerPallet: '1' })
+        setFormState({ _id: '', name: '', products: [] })
     };
 
 
@@ -92,21 +92,21 @@ const ModifyCategory = ({ category, setShowModifyForm }) => {
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    New package configuration
+                                    Category configuration
                                 </Dialog.Title>
                                 <form className="mt-2">
                                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div className="sm:col-span-5">
                                             <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                Configuration name
+                                                Category name
                                             </label>
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    name="configName"
-                                                    id="configName"
-                                                    autoComplete="config 1"
-                                                    placeholder={pkConfig.configName}
+                                                    name="name"
+                                                    id="name"
+                                                    autoComplete="cat1"
+                                                    placeholder={category.name}
                                                     onChange={handleChange}
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -115,52 +115,16 @@ const ModifyCategory = ({ category, setShowModifyForm }) => {
 
                                         <div className="sm:col-span-5">
                                             <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                Item(s) in a package
+                                                Products
                                             </label>
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    name="itemPerPk"
-                                                    id="itemPerPk"
-                                                    autoComplete="1"
-                                                    placeholder={pkConfig.itemPerPk}
+                                                    name="products"
+                                                    id="products"
+                                                    autoComplete="products1"
+                                                    placeholder={category.products}
                                                     onChange={handleChange}
-                                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="sm:col-span-5">
-                                            <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                Package(s) on a layer
-                                            </label>
-                                            <div className="mt-2">
-                                                <input
-                                                    id="pkPerlayer"
-                                                    name="pkPerlayer"
-                                                    type="number"
-                                                    autoComplete="1"
-                                                    placeholder={pkConfig.pkPerlayer}
-                                                    onChange={handleChange}
-
-                                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="sm:col-span-5">
-                                            <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                Layer(s) in a pallet
-                                            </label>
-                                            <div className="mt-2">
-                                                <input
-                                                    id="layerPerPallet"
-                                                    name="layerPerPallet"
-                                                    type="number"
-                                                    autoComplete="1"
-                                                    placeholder={pkConfig.layerPerPallet}
-                                                    onChange={handleChange}
-
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
@@ -171,14 +135,14 @@ const ModifyCategory = ({ category, setShowModifyForm }) => {
                                     <button
                                         type="button"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        onClick={handlePkConfigUpdate}
+                                        onClick={handleCategoryUpdate}
                                     >
                                         Update
                                     </button>
                                     <button
                                         type="button"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                        onClick={handlePkConfigDelete}
+                                        onClick={handleCategoryDelete}
                                     >
                                         Delete
                                     </button>

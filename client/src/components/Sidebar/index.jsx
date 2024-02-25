@@ -10,7 +10,7 @@ function Sidebar() {
 
     return (
         <>
-            <div className="flex-col flex justify-between h-full p-3 w-1/5 bg-stone-400 text-gray-800 rounded-l-xxl">
+            <div className="flex-col flex justify-between h-full p-3 w-1/5 bg-stone-400 text-gray-800 rounded-l-xxl ">
                 <div>
                     <div className="flex items-center p-3 space-x-4 mt-3 mb-5">
                         <img src="https://placehold.co/600x400" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
