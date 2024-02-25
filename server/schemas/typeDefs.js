@@ -38,6 +38,35 @@ const typeDefs = `
     productCount: Int
   }
 
+  type FinanceSchema{
+    _id:ID
+    rrp:Float
+    cost: Float
+  }
+
+  type ProductStackSchema{
+    _id:ID
+    pkConfig: Int!
+    pkQty: Int!
+    layerQty: Int!
+    palletQty: Int!
+    warehouses: [Warehouse]!
+    zoneCode: String
+    subTotalQty: Int
+  }
+
+  type Product{
+    _id:ID
+    name: String!
+    description: String
+    image: String
+    productStacks:[ProductStackSchema]
+    categories:[ID]!
+    finance: FinanceSchema
+    owner: String
+    totalQty: Int
+  }
+
   type Auth {
     token:ID
     user: User
@@ -48,6 +77,7 @@ const typeDefs = `
     warehouses:[Warehouse]
     pkConfigs:[PkConfig]
     categories:[Category]
+    products:[Product]
   }
 
   type Mutation {
@@ -65,6 +95,10 @@ const typeDefs = `
     addCategory(name: String!,products:[ID]):Category
     updateCategory(_id:ID!,name: String!, products:ID):Category
     removeCategory(_id:ID!):Category
+
+    addProduct(name: String!,products:[ID]):Product
+    updateProduct(_id:ID!,name: String!, products:ID):Product
+    removeProduct(_id:ID!):Products
   }
 `;
 

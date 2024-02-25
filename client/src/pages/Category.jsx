@@ -2,8 +2,8 @@ import Sidebar from '../components/Sidebar'
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { QUERY_CATEGORIES } from '../utils/queries';
-import NewPkConfig from '../components/'
-import ModifyPkConfig from '../components/'
+import NewPkConfig from '../components/NewCategory'
+import ModifyPkConfig from '../components/ModifyCategory'
 
 const Category = () => {
     const [showModifyForm, setShowModifyForm] = useState(false);

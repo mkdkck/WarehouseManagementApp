@@ -35,7 +35,7 @@ const productStackSchema = new Schema({
         default: 1,
         min: 1
     },
-    warehouse: {
+    warehouses: {
         type: Schema.Types.ObjectId,
         ref: 'Warehouse',
         require: true
@@ -67,12 +67,12 @@ const productSchema = new Schema({
     image: {
         type: String
     },
-    productStack: [productStackSchema],
-    category: {
+    productStacks: [productStackSchema],
+    categories: [{
         type: Schema.Types.ObjectId,
         ref: 'Category',
         required: true
-    },
+    }],
     finance: [financeSchema],
     owner: {
         type: String,
