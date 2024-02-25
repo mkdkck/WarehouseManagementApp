@@ -12,6 +12,9 @@ const resolvers = {
         categories: async () => {
             return await Category.find().populate('products');
         },
+        products: async () => {
+            return await Product.find().populate('categories');
+        },
     },
 
     Mutation: {
@@ -162,10 +165,94 @@ const resolvers = {
                 { _id: args._id });
 
             if (!category) {
-                throw new Error('No package configuration found');
+                throw new Error('No category found');
             }
 
             return category;
+        },
+
+        addProduct: async (parent, args) => {
+            const product = await Product.findOne({ name: args.name })
+
+            if (product) {
+                throw new Error('Item with the same name already exists.');
+            }
+
+            const newProduct = await Product.create(args);
+
+            return newProduct;
+        },
+
+        updateProduct: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const product = await Product.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!product) {
+                throw new Error('No item found');
+            }
+
+            return product;
+        },
+
+        removeProduct: async (parent, args) => {
+            const product = await Product.findOneAndRemove(
+                { _id: args._id });
+
+            if (!product) {
+                throw new Error('No item found');
+            }
+
+            return product;
+        },
+
+        addProductStack: async (parent, args) => {
+            const productStack = await Product.findOne({ productStacks: { pkConfig: args._id } })
+
+            if (productStack === args) {
+                throw new Error('Same stack already exists.');
+            }
+
+            const newProductStack = await Product.create(args);
+
+            return newProductStack;
+        },
+
+        updateProductStack: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const productStack = await Product.findOneAndUpdate(
+                { productStacks: { _id: args._id } },
+                {
+                    productStacks: updateData
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!productStack) {
+                throw new Error('No item found');
+            }
+
+            return productStack;
+        },
+
+        removeProducStackt: async (parent, args) => {
+            const productStack = await Product.findOneAndRemove(
+                { productStacks: { _id: args._id } });
+
+            if (!productStack) {
+                throw new Error('No item found');
+            }
+
+            return productStack;
         },
 
         login: async (parent, { email, password }) => {
