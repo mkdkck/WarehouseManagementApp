@@ -94,8 +94,8 @@ const typeDefs = `
     removeProduct(_id:ID!):Product
 
     addProductStack(pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
-    updateProduct(_id:ID!,pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
-    removeProduct(_id:ID!):Products
+    updateProductStack(_id:ID!,pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
+    removeProductStack(_id:ID!):Product
   }
 `;
 

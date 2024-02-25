@@ -86,8 +86,6 @@ export const ADD_PKCONFIG = gql`
         itemPerPk
         pkPerlayer
         layerPerPallet
-        palletTotalItems
-        palletTotalPks
       }
     }
 `
@@ -118,8 +116,6 @@ export const UPDATE_PKCONFIG = gql`
         itemPerPk
         pkPerlayer
         layerPerPallet
-        palletTotalItems
-        palletTotalPks
     }
   }
 `;
@@ -166,6 +162,126 @@ export const UPDATE_CATEGORY = gql`
           _id
           name
         }
+      }
+  }
+`;
+
+export const ADD_PRODUCT = gql`
+  mutation addProduct(
+    $name: String!
+    $description: String
+    $image: String
+    $categories:[ID]!
+    $owner: String){  
+      addProduct(
+        name: $name
+        description: $description
+        image: $image
+        categories:$categories
+        owner: $owner
+      ){
+        _id
+        name
+        description
+        image
+        categories
+        owner
+      }
+    }
+`
+export const REMOVE_PRODUCT = gql`
+  mutation removeProduct($_id: ID!) {
+    removeProduct(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $_id:ID!
+    $name: String!
+    $description: String
+    $image: String
+    $categories:[ID]!
+    $owner: String){
+      updateProduct(
+      _id: $_id,
+      name: $name
+      description: $description
+      image: $image
+      categories:$categories
+      owner: $owner
+      ){
+        _id
+        name
+        description
+        image
+        categories
+        owner
+      }
+  }
+`;
+
+export const ADD_PRODUCTSTACK = gql`
+  mutation addProductStack(
+    $pkConfig: ID!,
+    $pkQty: Int!,
+    $layerQty: Int!,
+    $palletQty: Int!,
+    $warehouses: [ID]!,
+    $zoneCode: String){  
+      addProductStack(
+        pkConfig: $pkConfig
+        pkQty:$pkQty
+        layerQty: $layerQty
+        palletQty: $palletQty
+        warehouses: $warehouses
+        zoneCode: $zoneCode
+      ){
+        pkConfig
+        pkQty
+        layerQty
+        palletQty
+        warehouses
+        zoneCode
+      }
+    }
+`
+export const REMOVE_PRODUCTSTACK = gql`
+  mutation removeProductStack($_id: ID!) {
+    removeProductStack(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCTSTACK = gql`
+  mutation updateProductStack(
+    $_id:ID!
+    $pkConfig: ID!,
+    $pkQty: Int!,
+    $layerQty: Int!,
+    $palletQty: Int!,
+    $warehouses: [ID]!,
+    $zoneCode: String){
+    updateProductStack(
+      pkConfig
+      pkQty
+      layerQty
+      palletQty
+      warehouses
+      zoneCode
+      ){
+        _id
+        pkConfig
+        pkQty
+        layerQty
+        palletQty
+        warehouses
+        zoneCode
       }
   }
 `;
