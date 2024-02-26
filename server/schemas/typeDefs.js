@@ -105,7 +105,7 @@ const typeDefs = `
 
     addProductStack(productId:ID!,input:ProductStackInput!):Product
     updateProductStack(productId:ID!,productStackId: ID!,input:ProductStackInput!):Product
-    removeProductStack(_id:ID!):Product
+    removeProductStack(productId:ID!,productStackId: ID!):Product
   }
 `;
 

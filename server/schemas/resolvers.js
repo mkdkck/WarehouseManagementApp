@@ -221,7 +221,7 @@ const resolvers = {
 
         addProductStack: async (parent, { productId, input }) => {
             const productStack = await Product.findByIdAndUpdate(
-                productId, { $push: { productStacks: { input } } },
+                productId, { $addToSet: { productStacks: { input } } },
                 {
                     new: true,
                     runValidators: true,
@@ -236,12 +236,13 @@ const resolvers = {
             return productStack;
         },
 
-        updateProductStack: async (parent, args) => {
-            const { _id, ...updateData } = args
+        updateProductStack: async (parent, { productId, productStackId, input }) => {
             const productStack = await Product.findOneAndUpdate(
-                { productStacks: { _id: args._id } },
+                { _id: productId, 'productStacks._id': productStackId },
                 {
-                    productStacks: updateData
+                    $set: {
+                        'productStacks.$': input
+                    }
                 },
                 {
                     new: true,
@@ -256,9 +257,10 @@ const resolvers = {
             return productStack;
         },
 
-        removeProductStack: async (parent, args) => {
-            const productStack = await Product.findOneAndRemove(
-                { productStacks: { _id: args._id } });
+        removeProductStack: async (parent, { productId, productStackId }) => {
+            const productStack = await Product.findByIdAndUpdate(
+                { productId },
+                { $pull: { productStacks: { _id: productStackId } } });
 
             if (!productStack) {
                 throw new Error('No item found');
