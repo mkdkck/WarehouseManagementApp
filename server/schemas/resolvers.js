@@ -221,17 +221,16 @@ const resolvers = {
 
         addProductStack: async (parent, { productId, input }) => {
             const productStack = await Product.findByIdAndUpdate(
-                productId, { $addToSet: { productStacks: { input } } },
+                productId, { $addToSet: { productStacks: input } },
                 {
                     new: true,
                     runValidators: true,
                 }
             )
-
             if (!productStack) {
                 throw new Error('Product not found.');
             }
-
+            console.log(productStack)
 
             return productStack;
         },
@@ -254,12 +253,12 @@ const resolvers = {
                 throw new Error('No item found');
             }
 
-            return productStack;
+            return productStack.productStacks;
         },
 
         removeProductStack: async (parent, { productId, productStackId }) => {
             const productStack = await Product.findByIdAndUpdate(
-                { productId },
+                { _id: productId, 'productStacks._id': productStackId },
                 { $pull: { productStacks: { _id: productStackId } } });
 
             if (!productStack) {

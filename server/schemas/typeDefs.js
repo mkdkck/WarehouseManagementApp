@@ -44,7 +44,7 @@ const typeDefs = `
     pkQty: Int!
     layerQty: Int!
     palletQty: Int!
-    warehouses: [Warehouse]!
+    warehouse: ID!
     zoneCode: String
     subTotalQty: Int
   }
@@ -54,7 +54,7 @@ const typeDefs = `
     pkQty: Int!
     layerQty: Int!
     palletQty: Int!
-    warehouses: ID!
+    warehouse: ID!
     zoneCode: String
   }
   

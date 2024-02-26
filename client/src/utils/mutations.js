@@ -225,34 +225,26 @@ export const UPDATE_PRODUCT = gql`
 `;
 
 export const ADD_PRODUCTSTACK = gql`
-  mutation addProductStack(
-    $productId:ID!
-    $input{
-      pkConfig: ID!,
-      pkQty: Int!,
-      layerQty: Int!,
-      palletQty: Int!,
-      warehouses: ID!,
-      zoneCode: String}){  
-      addProductStack(
-        productId:$ID
-        input:$input
-      ){
+mutation addProductStack(
+  $productId:ID!
+  $input:ProductStackInput!
+){  
+    addProductStack(
+      productId:$productId
+      input:$input
+    ){
+      _id
+      productStacks {
         _id
-        pkConfig{
-          _id
-          configName
-        }
+        pkConfig
         pkQty
         layerQty
         palletQty
-        warehouses{
-          _id
-          warehouseName
-        }
+        warehouse
         zoneCode
-      }
-    }
+      }      
+    }      
+  }
 `
 export const REMOVE_PRODUCTSTACK = gql`
   mutation removeProductStack($_id: ID!) {
@@ -267,33 +259,25 @@ export const UPDATE_PRODUCTSTACK = gql`
   mutation updateProductStack(
     $productId:ID!
     $productStackId: ID!,
-    $input{
-      pkConfig: ID!,
-      pkQty: Int!,
-      layerQty: Int!,
-      palletQty: Int!,
-      warehouses: ID!,
-      zoneCode: String}){
+    $input:ProductStackInput!
+  ){
     updateProductStack(
-      productId:$ID!
-      productStackId: $ID!
+      productId:$productId
+      productStackId:$productStackId
       input:$input
       ){
         _id
-        pkConfig{
+        productStacks {
           _id
-          configName
-        }
-        pkQty
-        layerQty
-        palletQty
-        warehouses{
-          _id
-          warehouseName
-        }
-        zoneCode
-      }
-  }
+          pkConfig
+          pkQty
+          layerQty
+          palletQty
+          warehouse
+          zoneCode
+        }      
+      }      
+    }
 `;
 
 export const LOGIN = gql`
