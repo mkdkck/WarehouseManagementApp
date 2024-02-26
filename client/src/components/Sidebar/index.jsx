@@ -203,12 +203,16 @@ function Sidebar() {
                                 <summary tabIndex={0} role="button" className="rounded-box font-bold">Reports</summary>
                                 <ul tabIndex={0} className="p-2">
                                     <li>
+                                        Under develepment
+                                    </li>
+                                    {/* <li>
                                         <Link
-                                            to='/Product'>
+                                            to='/Product'
+                                            className='disabled'>
                                             Stock Lists
                                         </Link>
                                     </li>
-                                    <li><a>View Package Configuration</a></li>
+                                    <li><a>View Package Configuration</a></li> */}
                                 </ul>
                             </details>
                         </li>

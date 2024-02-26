@@ -2,7 +2,7 @@ import Sidebar from '../components/Sidebar'
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { QUERY_PRODUCTS } from '../utils/queries';
-import NewCategory from '../components/NewCategory'
+import NewProduct from '../components/NewProduct'
 import ModifyCategory from '../components/ModifyCategory'
 
 const Product = () => {
@@ -28,7 +28,6 @@ const Product = () => {
     }
 
     const openModifyProduct = (product) => {
-        console.log(product)
         setShowModifyForm(true);
         setSelectedProduct(product);
     };
@@ -42,7 +41,7 @@ const Product = () => {
                 </div>
 
                 {/* Add a new warehouse function */}
-                <NewCategory />
+                <NewProduct />
 
                 <div className="card m-10 bg-grey-100 shadow-xl">
                     <div className="card-body">
