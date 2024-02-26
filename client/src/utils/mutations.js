@@ -226,25 +226,30 @@ export const UPDATE_PRODUCT = gql`
 
 export const ADD_PRODUCTSTACK = gql`
   mutation addProductStack(
-    $pkConfig: ID!,
-    $pkQty: Int!,
-    $layerQty: Int!,
-    $palletQty: Int!,
-    $warehouses: [ID]!,
-    $zoneCode: String){  
+    $productId:ID!
+    $input{
+      pkConfig: ID!,
+      pkQty: Int!,
+      layerQty: Int!,
+      palletQty: Int!,
+      warehouses: ID!,
+      zoneCode: String}){  
       addProductStack(
-        pkConfig: $pkConfig
-        pkQty:$pkQty
-        layerQty: $layerQty
-        palletQty: $palletQty
-        warehouses: $warehouses
-        zoneCode: $zoneCode
+        productId:$ID
+        input:$input
       ){
-        pkConfig
+        _id
+        pkConfig{
+          _id
+          configName
+        }
         pkQty
         layerQty
         palletQty
-        warehouses
+        warehouses{
+          _id
+          warehouseName
+        }
         zoneCode
       }
     }
@@ -260,27 +265,32 @@ export const REMOVE_PRODUCTSTACK = gql`
 
 export const UPDATE_PRODUCTSTACK = gql`
   mutation updateProductStack(
-    $_id:ID!
-    $pkConfig: ID!,
-    $pkQty: Int!,
-    $layerQty: Int!,
-    $palletQty: Int!,
-    $warehouses: [ID]!,
-    $zoneCode: String){
+    $productId:ID!
+    $productStackId: ID!,
+    $input{
+      pkConfig: ID!,
+      pkQty: Int!,
+      layerQty: Int!,
+      palletQty: Int!,
+      warehouses: ID!,
+      zoneCode: String}){
     updateProductStack(
-      pkConfig:$pkConfig
-      pkQty:$pkQty
-      layerQty:$layerQty
-      palletQty:$palletQty
-      warehouses:$warehouses
-      zoneCode:$zoneCode
+      productId:$ID!
+      productStackId: $ID!
+      input:$input
       ){
         _id
-        pkConfig
+        pkConfig{
+          _id
+          configName
+        }
         pkQty
         layerQty
         palletQty
-        warehouses
+        warehouses{
+          _id
+          warehouseName
+        }
         zoneCode
       }
   }

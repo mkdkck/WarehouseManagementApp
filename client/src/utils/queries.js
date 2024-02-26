@@ -48,7 +48,22 @@ export const QUERY_PRODUCT = gql`
         name
         description
         image
-        productStacks
+        productStacks{
+            _id
+            pkConfig{
+                _id
+                configName
+            }
+            pkQty
+            layerQty
+            palletQty
+            warehouses{
+                _id
+                warehouseName
+            }
+            zoneCode
+            subTotalQty
+        }
         categories
         owner
         totalQty

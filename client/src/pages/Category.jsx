@@ -12,7 +12,6 @@ const Category = () => {
     const { loading, data } = useQuery(QUERY_CATEGORIES)
     let categories = []
     if (data) { categories = data.categories }
-    console
 
 
     const openModifyCategory = (category) => {

@@ -13,7 +13,14 @@ const resolvers = {
             return await Category.find().populate('products');
         },
         products: async () => {
-            return await Product.find().populate('categories');
+            return await Product.find()
+                .populate({
+                    path: 'productStacks',
+                    populate: {
+                        path: 'pkConfig warehouses',
+                    },
+                })
+                .populate('categories')
         },
     },
 
@@ -212,16 +219,21 @@ const resolvers = {
             return product;
         },
 
-        addProductStack: async (parent, args) => {
-            const productStack = await Product.findOne({ productStacks: { pkConfig: args._id } })
+        addProductStack: async (parent, { productId, input }) => {
+            const productStack = await Product.findByIdAndUpdate(
+                productId, { $push: { productStacks: { input } } },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            )
 
-            if (productStack === args) {
-                throw new Error('Same stack already exists.');
+            if (!productStack) {
+                throw new Error('Product not found.');
             }
 
-            const newProductStack = await Product.create(args);
 
-            return newProductStack;
+            return productStack;
         },
 
         updateProductStack: async (parent, args) => {

@@ -49,6 +49,16 @@ const typeDefs = `
     subTotalQty: Int
   }
 
+  input ProductStackInput {
+    pkConfig: ID!
+    pkQty: Int!
+    layerQty: Int!
+    palletQty: Int!
+    warehouses: ID!
+    zoneCode: String
+  }
+  
+
   type Product{
     _id:ID
     name: String!
@@ -93,8 +103,8 @@ const typeDefs = `
     updateProduct(_id:ID!, name: String!, description: String, image: String, categories:[ID], owner: String):Product
     removeProduct(_id:ID!):Product
 
-    addProductStack(pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
-    updateProductStack(_id:ID!,pkConfig: ID!, pkQty: Int!, layerQty: Int!, palletQty: Int!, warehouses: [ID]!, zoneCode: String):Product
+    addProductStack(productId:ID!,input:ProductStackInput!):Product
+    updateProductStack(productId:ID!,productStackId: ID!,input:ProductStackInput!):Product
     removeProductStack(_id:ID!):Product
   }
 `;
