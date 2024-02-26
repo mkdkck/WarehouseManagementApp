@@ -41,7 +41,7 @@ export const QUERY_CATEGORIES = gql`
     }
 }
 `
-export const QUERY_PRODUCT = gql`
+export const QUERY_PRODUCTS = gql`
 {
     products{
         _id
@@ -53,6 +53,9 @@ export const QUERY_PRODUCT = gql`
             pkConfig{
                 _id
                 configName
+                itemPerPk
+                pkPerlayer
+                layerPerPallet
             }
             pkQty
             layerQty
@@ -64,9 +67,11 @@ export const QUERY_PRODUCT = gql`
             zoneCode
             subTotalQty
         }
-        categories
+        categories{
+            _id
+            name
+        }
         owner
-        totalQty
     }
 }
 `

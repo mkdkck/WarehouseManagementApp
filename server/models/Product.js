@@ -34,17 +34,8 @@ const productStackSchema = new Schema({
     zoneCode: {
         type: String
     }
-}, {
-    toJSON: {
-        virtuals: true,
-    },
-    id: false,
 }
 )
-
-productStackSchema.virtual('subTotalQty').get(function () {
-    return this.pkQty * this.pkConfig.itemPerPk + this.layerQty * this.pkConfig.pkPerlayer + this.palletQty * this.pkConfig.layerPerPallet;
-});
 
 const productSchema = new Schema({
     name: {

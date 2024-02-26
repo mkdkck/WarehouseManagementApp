@@ -17,7 +17,7 @@ const resolvers = {
                 .populate({
                     path: 'productStacks',
                     populate: {
-                        path: 'pkConfig warehouses',
+                        path: 'pkConfig warehouse',
                     },
                 })
                 .populate('categories')

@@ -38,6 +38,17 @@ const typeDefs = `
     productCount: Int
   }
 
+   type Product{
+    _id:ID
+    name: String!
+    description: String
+    image: String
+    productStacks:[ProductStackSchema]
+    categories:[Category]
+    owner: String
+    totalQty: Int
+  }
+
   type ProductStackSchema{
     _id:ID
     pkConfig: PkConfig
@@ -56,18 +67,6 @@ const typeDefs = `
     palletQty: Int!
     warehouse: ID!
     zoneCode: String
-  }
-  
-
-  type Product{
-    _id:ID
-    name: String!
-    description: String
-    image: String
-    productStacks:[ProductStackSchema]
-    categories:[ID]
-    owner: String
-    totalQty: Int
   }
 
   type Auth {

@@ -19,10 +19,10 @@ const Warehouse = () => {
     };
 
     return (
-        <div className='p-6 h-screen flex flex-1'>
+        <div className='p-6 h-screen flex flex-1 lg:justify-center'>
             <Sidebar />
-            <div className='flex flex-col w-4/5'>
-                <div className='w-full p-6 h-14 flex place-items-center rounded-r-xxl bg-gradient-to-r from-stone-400 from-30% to-blue-500 '>
+            <div className='flex flex-col w-4/5 flex-1 '>
+                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-stone-400 from-30% to-green-500 max-lg:rounded-xxl lg:rounded-r-xxl  '>
                     <h1 className='font-extrabold text-2xl'>Warehouse</h1>
                 </div>
 
@@ -42,16 +42,16 @@ const Warehouse = () => {
                                     <th>Contact</th>
                                 </tr>
                             </thead>
-                            {loading ? <tbody><tr><td>Loading...</td></tr></tbody> :
-                                warehouses.map((warehouse) => (
-                                    <tbody>
+                            <tbody>
+                                {loading ? <tr><td>Loading...</td></tr> :
+                                    warehouses.map((warehouse) => (
                                         < tr key={warehouse._id} className="hover" onClick={() => openModifyWarehouse(warehouse)} >
                                             <td>{warehouse.warehouseName}</td>
                                             <td>{warehouse.location}</td>
                                             <td>{warehouse.contactNumber}</td>
                                         </tr>
-                                    </tbody>
-                                ))}
+                                    ))}
+                            </tbody>
                         </table>
                         {showModifyForm && <ModifyWarehouseForm warehouse={selectedWarehouse} setShowModifyForm={setShowModifyForm} />}
 

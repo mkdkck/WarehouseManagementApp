@@ -22,12 +22,12 @@ const Category = () => {
     return (
         <div className='p-6 h-screen flex flex-1'>
             <Sidebar />
-            <div className='flex flex-col w-4/5'>
-                <div className='w-full p-6 h-14 flex place-items-center rounded-r-xxl bg-gradient-to-r from-stone-400 from-30% to-green-500 '>
+            <div className='flex flex-col w-4/5 flex-1 '>
+                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-stone-400 from-30% to-green-500 max-lg:rounded-xxl lg:rounded-r-xxl  '>
                     <h1 className='font-extrabold text-2xl'>Category</h1>
                 </div>
 
-                {/* Add a new warehouse function */}
+                {/* Add a new Category function */}
                 <NewCategory />
 
                 <div className="card m-10 bg-grey-100 shadow-xl">
@@ -43,15 +43,15 @@ const Category = () => {
                                     <th>Products under this category</th>
                                 </tr>
                             </thead>
-                            {loading ? <tbody><tr><td>Loading...</td></tr></tbody> :
-                                categories.map((category) => (
-                                    <tbody>
+                            <tbody>
+                                {loading ? <tr><td>Loading...</td></tr> :
+                                    categories.map((category) => (
                                         < tr key={category._id} className="hover" onClick={() => openModifyCategory(category)} >
                                             <td>{category.name}</td>
                                             <td>{category.productCount}</td>
                                         </tr>
-                                    </tbody>
-                                ))}
+                                    ))}
+                            </tbody>
                         </table>
                         {showModifyForm && <ModifyCategory category={selectedCategory} setShowModifyForm={setShowModifyForm} />}
 

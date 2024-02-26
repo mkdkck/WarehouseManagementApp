@@ -84,6 +84,7 @@ function Login() {
                         </p>
                     </div>
                 </form>
+                {error && <div>Something went wrong... <p>{error.message}</p></div>}
             </div>
             <Footer />
         </>
