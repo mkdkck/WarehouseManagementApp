@@ -236,19 +236,21 @@ mutation addProductStack(
       _id
       productStacks {
         _id
-        pkConfig
+        pkConfig{_id
+        }
         pkQty
         layerQty
         palletQty
-        warehouse
+        warehouse{_id
+        }
         zoneCode
       }      
     }      
   }
 `
 export const REMOVE_PRODUCTSTACK = gql`
-  mutation removeProductStack($_id: ID!) {
-    removeProductStack(_id: $_id) {
+  mutation removeProductStack($productId:ID!,$productStackId: ID!) {
+    removeProductStack(productId:$productId,productStackId: $productStackId) {
       _id
       name
     }
@@ -267,14 +269,16 @@ export const UPDATE_PRODUCTSTACK = gql`
       input:$input
       ){
         _id
-        productStacks {
-          _id
-          pkConfig
-          pkQty
-          layerQty
-          palletQty
-          warehouse
-          zoneCode
+      productStacks {
+        _id
+        pkConfig{_id
+        }
+        pkQty
+        layerQty
+        palletQty
+        warehouse{_id
+        }
+        zoneCode
         }      
       }      
     }

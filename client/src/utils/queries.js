@@ -57,7 +57,7 @@ export const QUERY_PRODUCT = gql`
             pkQty
             layerQty
             palletQty
-            warehouses{
+            warehouse{
                 _id
                 warehouseName
             }

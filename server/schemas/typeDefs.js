@@ -40,11 +40,11 @@ const typeDefs = `
 
   type ProductStackSchema{
     _id:ID
-    pkConfig: ID!
+    pkConfig: PkConfig
     pkQty: Int!
     layerQty: Int!
     palletQty: Int!
-    warehouse: ID!
+    warehouse: Warehouse
     zoneCode: String
     subTotalQty: Int
   }
