@@ -53,7 +53,7 @@ const Home = () => {
                     </div>
 
                 </div>
-                <div>
+                <div className='flex flex-1 flex-wrap justify-center'>
                     {RenderPage.map((page) => (
                         <Card page={page} />
                     ))}

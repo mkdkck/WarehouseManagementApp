@@ -22,7 +22,7 @@ const Warehouse = () => {
         <div className='p-6 h-screen flex flex-1 lg:justify-center'>
             <Sidebar />
             <div className='flex flex-col w-4/5 flex-1 '>
-                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-slate-500 from-30% to-sky-950 max-lg:rounded-xxl lg:rounded-r-xxl  '>
+                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-slate-300 from-30% to-sky-950 max-lg:rounded-xxl lg:rounded-r-xxl  '>
                     <h1 className='font-extrabold text-2xl'>Warehouse</h1>
                 </div>
 
