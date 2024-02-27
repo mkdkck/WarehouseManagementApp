@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('./Product');
 
 const { Schema, model } = mongoose;
 
@@ -27,5 +28,14 @@ categorySchema.virtual('productCount').get(function () {
 });
 
 const Category = model('Category', categorySchema);
+
+categorySchema.pre('remove', async function (next) {
+    try {
+        await Product.deleteMany({ 'categories': this._id });
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = Category;

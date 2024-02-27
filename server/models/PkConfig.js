@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('./Product');
 
 const { Schema, model } = mongoose;
 
@@ -48,5 +49,14 @@ pkConfigSchema.virtual('palletTotalPks').get(function () {
 });
 
 const PkConfig = model('PkConfig', pkConfigSchema);
+
+pkConfigSchema.pre('remove', async function (next) {
+    try {
+        await Product.deleteMany({ 'productStacks.pkConfig': this._id });
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = PkConfig;
