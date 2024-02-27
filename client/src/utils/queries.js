@@ -34,8 +34,7 @@ export const QUERY_CATEGORIES = gql`
             _id
             name
             description
-            owner
-            totalQty
+            owner            
         }
         productCount
     }
