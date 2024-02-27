@@ -1,5 +1,16 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USERS = gql`
+{
+    users{
+        _id
+        username
+        email
+        role
+        organization
+    }
+}`
+
 export const QUERY_WAREHOUSES = gql`
 {
     warehouses{
@@ -34,7 +45,7 @@ export const QUERY_CATEGORIES = gql`
             _id
             name
             description
-            owner            
+            owner
         }
         productCount
     }

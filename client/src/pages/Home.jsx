@@ -19,7 +19,6 @@ const Home = () => {
         });
     };
     const checked = { ...formState }
-    console.log(checked)
     //need to be dynamic fetched
     const RenderPage = ["warehouse", "category", "product", "user"]
 
@@ -55,10 +54,9 @@ const Home = () => {
 
                 </div>
                 <div>
-                    {/* {RenderPage.map((page) => (
+                    {RenderPage.map((page) => (
                         <Card page={page} />
-                    ))} */}
-
+                    ))}
                 </div>
             </div>
         </div >

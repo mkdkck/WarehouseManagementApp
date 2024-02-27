@@ -14,14 +14,14 @@ const Welcome = () => {
                     </div>
                     <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
                         <h1 className="text-5xl font-bold leadi sm:text-6xl">Small Business
-                            <p className="text-violet-400">WHM</p>App
+                            <p className="text-slate-500 ">WHM</p>App
                         </h1>
                         <p className="mt-6 mb-8 text-lg sm:mb-12">Help to manage your stocks
                             <br className="hidden md:inline lg:hidden" /> Anytime Anywhere
                         </p>
                         <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
                             <Link
-                                to='/Signup' className="px-8 py-3 text-lg font-semibold rounded bg-violet-400 text-gray-900"
+                                to='/Signup' className="px-8 py-3 text-lg font-semibold rounded bg-slate-500 text-white-900"
                             >Get Started
                             </Link>
                             <Link

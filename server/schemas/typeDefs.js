@@ -10,8 +10,8 @@ const typeDefs = `
 
   type Organization{
     _id:ID
-    OrgName:String!
-    Members:[User]
+    orgName:String!
+    members:[User]
   }
 
   type Warehouse{
@@ -74,6 +74,7 @@ const typeDefs = `
 
   type Query {
     user: User
+    users:[User]
     warehouses:[Warehouse]
     pkConfigs:[PkConfig]
     categories:[Category]

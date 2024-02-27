@@ -3,6 +3,9 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
+        users: async () => {
+            return await User.find();
+        },
         warehouses: async () => {
             return await Warehouse.find();
         },

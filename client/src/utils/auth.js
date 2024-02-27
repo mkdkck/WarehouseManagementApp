@@ -45,9 +45,6 @@ class AuthService {
         window.location.assign('/');
     }
 
-    controlOrg() {
-
-    }
 }
 
 export default new AuthService();
