@@ -65,7 +65,6 @@ export const QUERY_PRODUCTS = gql`
                 warehouseName
             }
             zoneCode
-            subTotalQty
         }
         categories{
             _id

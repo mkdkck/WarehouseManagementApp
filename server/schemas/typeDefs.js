@@ -46,7 +46,6 @@ const typeDefs = `
     productStacks:[ProductStackSchema]
     categories:[Category]
     owner: String
-    totalQty: Int
   }
 
   type ProductStackSchema{
@@ -57,7 +56,6 @@ const typeDefs = `
     palletQty: Int!
     warehouse: Warehouse
     zoneCode: String
-    subTotalQty: Int
   }
 
   input ProductStackInput {

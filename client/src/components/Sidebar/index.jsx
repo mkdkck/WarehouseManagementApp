@@ -21,7 +21,7 @@ function Sidebar() {
             <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                 <div className="fixed top-0 left-0 inset-0 z-10" />
                 <Dialog.Panel className="fixed top-0 left-0 inset-y-0 z-10 w-full overflow-y-auto bg-white px-3 py-6 max-w-48 sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex-col flex justify-between h-full p-3 w-full bg-stone-400 text-gray-800 rounded-xxl">
+                    <div className="flex-col flex justify-between h-full p-3 w-full bg-slate-300 text-gray-800 rounded-xxl">
                         <div>
                             <button
                                 type="button"
@@ -130,11 +130,11 @@ function Sidebar() {
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button >
             </div >
-            <div className="hidden lg:flex flex-col flex justify-between h-full p-3 w-1/5 bg-stone-400 text-gray-800 rounded-l-xxl ">
+            <div className="hidden lg:flex flex-col flex justify-between h-full p-3 w-1/5 bg-slate-300 text-gray-800 rounded-l-xxl ">
 
                 <div>
                     <div className="flex items-center p-3 space-x-4 mt-3 mb-5">
-                        <img src="https://placehold.co/600x400" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
+                        <img src="https://placehold.co/600x400" alt="profilePhoto" className="w-12 h-12 rounded-full bg-gray-500" />
                         <div>
                             <h2 className="text-xl font-bold">{data.username}</h2>
                             <span className="flex items-center space-x-1">

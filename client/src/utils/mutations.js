@@ -184,7 +184,9 @@ export const ADD_PRODUCT = gql`
         name
         description
         image
-        categories
+        categories{
+          _id
+        }
         owner
       }
     }

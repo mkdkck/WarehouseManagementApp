@@ -14,16 +14,17 @@ const Product = () => {
     if (data) { products = data.products }
 
     const showTotalQty = (product) => {
+
         let totalQty = 0;
         product.productStacks.forEach(productStack => {
             const subtotalQty =
                 productStack.pkQty * productStack.pkConfig.itemPerPk +
-                productStack.layerQty * productStack.pkConfig.pkPerlayer +
-                productStack.palletQty * productStack.pkConfig.layerPerPallet;
+                productStack.layerQty * productStack.pkConfig.itemPerPk * productStack.pkConfig.pkPerlayer +
+                productStack.palletQty * productStack.pkConfig.itemPerPk * productStack.pkConfig.pkPerlayer * productStack.pkConfig.layerPerPallet;
 
             totalQty += subtotalQty;
-        });
 
+        });
         return totalQty
     }
 
@@ -36,7 +37,7 @@ const Product = () => {
         <div className='p-6 h-screen flex flex-1'>
             <Sidebar />
             <div className='flex flex-col w-4/5 flex-1 '>
-                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-stone-400 from-30% to-green-500 max-lg:rounded-xxl lg:rounded-r-xxl  '>
+                <div className='w-full p-6 h-14 flex place-items-center bg-gradient-to-r from-slate-300 from-30% to-sky-950 max-lg:rounded-xxl lg:rounded-r-xxl  '>
                     <h1 className='font-extrabold text-2xl'>Product</h1>
                 </div>
 
@@ -55,7 +56,7 @@ const Product = () => {
                                     <th>Product name</th>
                                     <th>Image</th>
                                     <th>Owner</th>
-                                    <th>Total quantity</th>
+                                    <th>Total quantity (bottles)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +64,7 @@ const Product = () => {
                                     products.map((product) => (
                                         < tr key={product._id} className="hover" onClick={() => openModifyProduct(product)} >
                                             <td>{product.name}</td>
-                                            <td>{product.image}</td>
+                                            <td><img src={product.image} alt={product.name} className='max-h-40' /></td>
                                             <td>{product.owner}</td>
                                             <td>{showTotalQty(product)}</td>
                                         </tr>
@@ -75,7 +76,7 @@ const Product = () => {
                         <div className="card-actions justify-end">
                             <div className="join">
                                 <button className="join-item btn">«</button>
-                                <button className="join-item btn">Page 22</button>
+                                <button className="join-item btn">Page 1</button>
                                 <button className="join-item btn">»</button>
                             </div>
                         </div>

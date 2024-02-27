@@ -15,9 +15,9 @@ const NewProduct = () => {
         owner: ""
     });
     const [productStackState, setProductStackstate] = useState({
-        pkQty: "",
-        layerQty: "",
-        palletQty: "",
+        pkQty: 0,
+        layerQty: 0,
+        palletQty: 0,
         zoneCode: "",
     });
     const [addProduct, { productError }] = useMutation(ADD_PRODUCT, {
@@ -34,6 +34,7 @@ const NewProduct = () => {
     const [categoryQuery, setCategoryQuery] = useState('');
     const [pkConfigSelected, setPkConfigSelected] = useState(null);
     const [pkConfigQuery, setPkConfigQuery] = useState('');
+
 
     //useQuery needs to wait until the data was fetch
     const warehouses = useQuery(QUERY_WAREHOUSES);
@@ -100,7 +101,6 @@ const NewProduct = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
-
     function closeModal() {
         setIsOpen(false)
     }
@@ -111,25 +111,75 @@ const NewProduct = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        const pkQtyInt = parseInt(productStackState.pkQty, 10);
+        const layerQtyInt = parseInt(productStackState.layerQty, 10);
+        const palletQtyInt = parseInt(productStackState.palletQty, 10);
 
-        const mutationResponse = await addCategory({
-            variables: { ...productState }
-        });
-        if (error) {
-            return
+        const newProductInfo = {
+            ...productState,
+            categories: categorySelected._id
         }
+
+        try {
+            const newProduct = await addProduct({
+                variables: { ...newProductInfo }
+            });
+
+            const newProductStackInfo = {
+                productId: newProduct.data.addProduct._id,
+                input: {
+                    pkQty: pkQtyInt,
+                    layerQty: layerQtyInt,
+                    palletQty: palletQtyInt,
+                    zoneCode: productStackState.zoneCode,
+                    pkConfig: pkConfigSelected._id,
+                    warehouse: warehouseSelected._id
+                }
+            }
+            const newProductStack = await addProductStack({
+                variables: {
+                    productId: newProductStackInfo.productId,
+                    input: newProductStackInfo.input
+                }
+            })
+
+        } catch (error) {
+            alert('An error occurred:', error);
+        }
+
         alert('A new product created sucessfully')
         closeModal()
-        setProductstate({ name: '', products: [] })
+        setProductstate({
+            name: "",
+            description: "",
+            image: "",
+            owner: ""
+        })
+        setProductStackstate({
+            pkQty: 0,
+            layerQty: 0,
+            palletQty: 0,
+            zoneCode: "",
+        })
     };
 
-    const handleChange = (event) => {
+    const handleProductChange = (event) => {
         const { name, value } = event.target;
-        setFormState({
-            ...formState,
+        setProductstate({
+            ...productState,
             [name]: value,
         });
     };
+
+    const handleProductStackChange = (event) => {
+        const { name, value } = event.target;
+        setProductStackstate({
+            ...productStackState,
+            [name]: value,
+        });
+    };
+
+
 
     return (
         <div >
@@ -177,6 +227,8 @@ const NewProduct = () => {
                                     </Dialog.Title>
                                     <form className="mt-2">
                                         <div className='flex max-md:flex-col md:flex-row'>
+
+                                            {/* basic product info section */}
                                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                                 <div className="sm:col-span-5">
                                                     <label className="block text-sm font-medium leading-6 text-gray-900">
@@ -188,7 +240,7 @@ const NewProduct = () => {
                                                             name="name"
                                                             id="name"
                                                             autoComplete="name"
-                                                            onChange={handleChange}
+                                                            onChange={handleProductChange}
                                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         />
                                                     </div>
@@ -279,7 +331,7 @@ const NewProduct = () => {
                                                             id="description"
                                                             autoComplete="description"
                                                             rows="3"
-                                                            onChange={handleChange}
+                                                            onChange={handleProductChange}
                                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         />
                                                     </div>
@@ -294,7 +346,7 @@ const NewProduct = () => {
                                                             name="image"
                                                             id="image"
                                                             autoComplete="image"
-                                                            onChange={handleChange}
+                                                            onChange={handleProductChange}
                                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         />
                                                     </div>
@@ -309,14 +361,15 @@ const NewProduct = () => {
                                                             name="owner"
                                                             id="owner"
                                                             autoComplete="owner"
-                                                            onChange={handleChange}
+                                                            onChange={handleProductChange}
                                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         />
                                                     </div>
                                                 </div>
                                             </div>
+                                            {/* basic product info section */}
 
-
+                                            {/* product stack info section */}
                                             <div className='mt-10 ms-10'>
                                                 <h2>Product Stack:</h2>
 
@@ -325,6 +378,7 @@ const NewProduct = () => {
                                                         Package configuration
                                                     </label>
                                                     <div className="mt-2">
+
                                                         {/* Product Selection box pkConfig */}
                                                         <div className="w-72">
                                                             <Combobox value={pkConfigSelected} onChange={setPkConfigSelected}>
@@ -391,6 +445,7 @@ const NewProduct = () => {
                                                             </Combobox>
                                                         </div>
                                                         {/* Product Selection box pkConfig */}
+
                                                     </div>
                                                 </div>
                                                 <div className='flex flex-row'>
@@ -404,7 +459,7 @@ const NewProduct = () => {
                                                                 name="pkQty"
                                                                 id="pkQty"
                                                                 autoComplete="pkQty"
-                                                                onChange={handleChange}
+                                                                onChange={handleProductStackChange}
                                                                 className="block w-1/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                             />
                                                         </div>
@@ -419,7 +474,7 @@ const NewProduct = () => {
                                                                 name="layerQty"
                                                                 id="layerQty"
                                                                 autoComplete="layerQty"
-                                                                onChange={handleChange}
+                                                                onChange={handleProductStackChange}
                                                                 className="block w-1/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                             />
                                                         </div>
@@ -434,7 +489,7 @@ const NewProduct = () => {
                                                                 name="palletQty"
                                                                 id="palletQty"
                                                                 autoComplete="palletQty"
-                                                                onChange={handleChange}
+                                                                onChange={handleProductStackChange}
                                                                 className="block w-1/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                             />
                                                         </div>
@@ -524,16 +579,21 @@ const NewProduct = () => {
                                                             name="zoneCode"
                                                             id="zoneCode"
                                                             autoComplete="zoneCode"
-                                                            onChange={handleChange}
+                                                            onChange={handleProductStackChange}
                                                             className="block w-4/5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         />
                                                     </div>
                                                 </div>
 
                                             </div>
+                                            {/* product stack info section */}
+
                                         </div>
 
                                     </form>
+                                    {stackError && <div>Error adding new product Stack... <p>{stackError.message}</p></div>}
+                                    {productError && <div>Error adding new product... <p>{productError.message}</p></div>}
+
 
                                     <div className="mt-8">
                                         <button
@@ -550,10 +610,7 @@ const NewProduct = () => {
                                         >
                                             Cancel
                                         </button>
-
                                     </div>
-                                    {stackError && <div>Error adding new product Stack... <p>{stackError.message}</p></div>}
-                                    {productError && <div>Error adding new product... <p>{productError.message}</p></div>}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

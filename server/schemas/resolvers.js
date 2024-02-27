@@ -230,7 +230,6 @@ const resolvers = {
             if (!productStack) {
                 throw new Error('Product not found.');
             }
-            console.log(productStack)
 
             return productStack;
         },

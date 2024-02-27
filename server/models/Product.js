@@ -12,19 +12,16 @@ const productStackSchema = new Schema({
         type: Number,
         required: true,
         default: 1,
-        min: 1
     },
     layerQty: {
         type: Number,
         required: true,
         default: 1,
-        min: 1
     },
     palletQty: {
         type: Number,
         required: true,
         default: 1,
-        min: 1
     },
     warehouse: {
         type: Schema.Types.ObjectId,
@@ -59,22 +56,7 @@ const productSchema = new Schema({
     owner: {
         type: String,
     }
-}, {
-    toJSON: {
-        virtuals: true,
-    },
-    id: false,
-}
-);
-
-productSchema.virtual('totalQty').get(function () {
-    let total = 0;
-    this.productStack.forEach(stack => {
-        total += stack.subTotalQty;
-    });
-    return total;
-});
-
+})
 
 const Product = model('Product', productSchema);
 
