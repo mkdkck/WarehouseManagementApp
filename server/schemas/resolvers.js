@@ -3,11 +3,27 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
+        users: async () => {
+            return await User.find();
+        },
         warehouses: async () => {
             return await Warehouse.find();
         },
         pkConfigs: async () => {
             return await PkConfig.find();
+        },
+        categories: async () => {
+            return await Category.find().populate('products');
+        },
+        products: async () => {
+            return await Product.find()
+                .populate({
+                    path: 'productStacks',
+                    populate: {
+                        path: 'pkConfig warehouse',
+                    },
+                })
+                .populate('categories')
         },
     },
 
@@ -122,6 +138,136 @@ const resolvers = {
             }
 
             return pkConfig;
+        },
+
+        addCategory: async (parent, args) => {
+            const category = await Category.findOne({ name: args.name })
+
+            if (category) {
+                throw new Error('Category with the same name already exists.');
+            }
+
+            const newCategory = await Category.create(args);
+
+            return newCategory;
+        },
+
+        updateCategory: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const category = await Category.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!category) {
+                throw new Error('No category found');
+            }
+
+            return category;
+        },
+
+        removeCategory: async (parent, args) => {
+            const category = await Category.findOneAndRemove(
+                { _id: args._id });
+
+            if (!category) {
+                throw new Error('No category found');
+            }
+
+            return category;
+        },
+
+        addProduct: async (parent, args) => {
+            const product = await Product.findOne({ name: args.name })
+
+            if (product) {
+                throw new Error('Item with the same name already exists.');
+            }
+
+            const newProduct = await Product.create(args);
+
+            return newProduct;
+        },
+
+        updateProduct: async (parent, args) => {
+            const { _id, ...updateData } = args
+            const product = await Product.findOneAndUpdate(
+                { _id: args._id },
+                updateData,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!product) {
+                throw new Error('No item found');
+            }
+
+            return product;
+        },
+
+        removeProduct: async (parent, args) => {
+            const product = await Product.findOneAndRemove(
+                { _id: args._id });
+
+            if (!product) {
+                throw new Error('No item found');
+            }
+
+            return product;
+        },
+
+        addProductStack: async (parent, { productId, input }) => {
+            const productStack = await Product.findByIdAndUpdate(
+                productId, { $addToSet: { productStacks: input } },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            )
+            if (!productStack) {
+                throw new Error('Product not found.');
+            }
+
+            return productStack;
+        },
+
+        updateProductStack: async (parent, { productId, productStackId, input }) => {
+            const productStack = await Product.findOneAndUpdate(
+                { _id: productId, 'productStacks._id': productStackId },
+                {
+                    $set: {
+                        'productStacks.$': input
+                    }
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+
+            if (!productStack) {
+                throw new Error('No item found');
+            }
+
+            return productStack.productStacks;
+        },
+
+        removeProductStack: async (parent, { productId, productStackId }) => {
+            const productStack = await Product.findByIdAndUpdate(
+                { _id: productId, 'productStacks._id': productStackId },
+                { $pull: { productStacks: { _id: productStackId } } });
+
+            if (!productStack) {
+                throw new Error('No item found');
+            }
+
+            return productStack;
         },
 
         login: async (parent, { email, password }) => {

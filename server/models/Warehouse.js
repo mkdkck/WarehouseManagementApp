@@ -14,7 +14,7 @@ const warehouseSchema = new Schema({
     },
     contactNumber: {
         type: String,
-    }
+    },
 });
 
 const Warehouse = model('Warehouse', warehouseSchema);

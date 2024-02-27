@@ -1,5 +1,16 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USERS = gql`
+{
+    users{
+        _id
+        username
+        email
+        role
+        organization
+    }
+}`
+
 export const QUERY_WAREHOUSES = gql`
 {
     warehouses{
@@ -21,6 +32,55 @@ export const QUERY_PKCONFIGS = gql`
         layerPerPallet
         palletTotalItems
         palletTotalPks
+    }
+}
+`
+
+export const QUERY_CATEGORIES = gql`
+{
+    categories{
+        _id
+        name
+        products{
+            _id
+            name
+            description
+            owner
+        }
+        productCount
+    }
+}
+`
+export const QUERY_PRODUCTS = gql`
+{
+    products{
+        _id
+        name
+        description
+        image
+        productStacks{
+            _id
+            pkConfig{
+                _id
+                configName
+                itemPerPk
+                pkPerlayer
+                layerPerPallet
+            }
+            pkQty
+            layerQty
+            palletQty
+            warehouse{
+                _id
+                warehouseName
+            }
+            zoneCode
+        }
+        categories{
+            _id
+            name
+        }
+        owner
     }
 }
 `

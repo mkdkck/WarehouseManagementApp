@@ -60,7 +60,7 @@ export default function Header() {
                     </NavLink>
                     <NavLink
                         to="/Login"
-                        className='text-sm mx-4 font-semibold leading-6 text-grey-900 rounded-md bg-violet-400 px-3'
+                        className='text-sm mx-4 font-semibold leading-6 text-grey-900 rounded-md bg-slate-500 px-3'
                     >Login
                     </NavLink>
 

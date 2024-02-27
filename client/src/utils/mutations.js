@@ -86,8 +86,6 @@ export const ADD_PKCONFIG = gql`
         itemPerPk
         pkPerlayer
         layerPerPallet
-        palletTotalItems
-        palletTotalPks
       }
     }
 `
@@ -118,12 +116,175 @@ export const UPDATE_PKCONFIG = gql`
         itemPerPk
         pkPerlayer
         layerPerPallet
-        palletTotalItems
-        palletTotalPks
     }
   }
 `;
 
+export const ADD_CATEGORY = gql`
+  mutation addCategory(
+    $name: String!
+    $products: [ID]){  
+      addCategory(
+        name: $name
+        products: $products
+      ){
+        _id
+        name
+        products{
+          _id
+          name
+        }
+      }
+    }
+`
+export const REMOVE_CATEGORY = gql`
+  mutation removeCategory($_id: ID!) {
+    removeCategory(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_CATEGORY = gql`
+  mutation updateCategory(
+    $_id:ID!
+    $name: String!
+    $products: [ID]){
+    updateCategory(
+      _id: $_id,
+      name: $name
+        products: $products
+      ){
+        _id
+        name
+        products{
+          _id
+          name
+        }
+      }
+  }
+`;
+
+export const ADD_PRODUCT = gql`
+  mutation addProduct(
+    $name: String!
+    $description: String
+    $image: String
+    $categories:[ID]
+    $owner: String){  
+      addProduct(
+        name: $name
+        description: $description
+        image: $image
+        categories:$categories
+        owner: $owner
+      ){
+        _id
+        name
+        description
+        image
+        categories{
+          _id
+        }
+        owner
+      }
+    }
+`
+export const REMOVE_PRODUCT = gql`
+  mutation removeProduct($_id: ID!) {
+    removeProduct(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $_id:ID!
+    $name: String!
+    $description: String
+    $image: String
+    $categories:[ID]
+    $owner: String){
+      updateProduct(
+      _id: $_id,
+      name: $name
+      description: $description
+      image: $image
+      categories:$categories
+      owner: $owner
+      ){
+        _id
+        name
+        description
+        image
+        categories
+        owner
+      }
+  }
+`;
+
+export const ADD_PRODUCTSTACK = gql`
+mutation addProductStack(
+  $productId:ID!
+  $input:ProductStackInput!
+){  
+    addProductStack(
+      productId:$productId
+      input:$input
+    ){
+      _id
+      productStacks {
+        _id
+        pkConfig{_id
+        }
+        pkQty
+        layerQty
+        palletQty
+        warehouse{_id
+        }
+        zoneCode
+      }      
+    }      
+  }
+`
+export const REMOVE_PRODUCTSTACK = gql`
+  mutation removeProductStack($productId:ID!,$productStackId: ID!) {
+    removeProductStack(productId:$productId,productStackId: $productStackId) {
+      _id
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCTSTACK = gql`
+  mutation updateProductStack(
+    $productId:ID!
+    $productStackId: ID!,
+    $input:ProductStackInput!
+  ){
+    updateProductStack(
+      productId:$productId
+      productStackId:$productStackId
+      input:$input
+      ){
+        _id
+      productStacks {
+        _id
+        pkConfig{_id
+        }
+        pkQty
+        layerQty
+        palletQty
+        warehouse{_id
+        }
+        zoneCode
+        }      
+      }      
+    }
+`;
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -131,6 +292,7 @@ export const LOGIN = gql`
       token
       user {
         _id
+        organization
       }
     }
   }
