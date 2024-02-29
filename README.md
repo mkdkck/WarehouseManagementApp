@@ -12,6 +12,7 @@ A lightweight WMS, have functions to customize packags, products and warehouses.
 - [Contribution](#contribution)
 - [Test](#test)
 - [Further Questions](#furtherquestions)
+- [Under Constructions](#underconstructions)
 
 
 ## Installation
@@ -29,24 +30,37 @@ Open the directory from VS Code.
 
 for online user:
 1. simply open this link to use:
-https://booksearchengine-h4w8.onrender.com
+https://smallbusinesswms.onrender.com/
 
 ## Usage
 
-1. open the link to see a page that you can search for books
+1. open the link to see a landing page that you can get all the info you need about this page(links setup, content need to be filled),
+pages are responsive.
 
-<img src="./assets/img/bookSearch.png" alt="Book Search" width= 60%> <br/>
+<img src="./assets/img/main.png" alt="mainpage" width= 60%> <br/>
+<img src="./assets/img/mainRes1.png" alt="mainpage res1" width= 60%> <br/>
+<img src="./assets/img/mainRes2.png" alt="mainpage res2" width= 60%> <br/>
 
-2. you can login to save books and display your saved books on your personal page
+2. you can either signup or signin for your personal data view
 
-<img src="./assets/img/loginSignUp.png" alt="login signup" width= 60%> <br/>
-<img src="./assets/img/savingFavBooks.png" alt="savingBooks" width= 60%> <br/>
+<img src="./assets/img/login.png" alt="login" width= 60%> <br/>
+<img src="./assets/img/SignUp.png" alt="Signup" width= 60%> <br/>
 
 
-3. you have a personal page, you can delete the books you saved
+3. after login, you are on the main app page. You can view, add, modify the data about warehouse, package information, category and products.
 
-<img src="./assets/img/personalPage.png" alt="personal page" width= 60%> <br/>
-<img src="./assets/img/Delete.png" alt="delete saved books" width= 60%> <br/>
+<img src="./assets/img/welcomePage.png" alt="welcomePage" width= 60%> <br/>
+<img src="./assets/img/addWarehouse.png" alt="addWarehouse" width= 60%> <br/>
+<img src="./assets/img/createProduct.png" alt="createProduct" width= 60%> <br/>
+<img src="./assets/img/manageCategory.png" alt="manageCategory" width= 60%> <br/>
+<img src="./assets/img/managePkConfig.png" alt="managePkConfig" width= 60%> <br/>
+<img src="./assets/img/manageProduct.png" alt="manageProduct" width= 60%> <br/>
+<img src="./assets/img/modifyWarehouse.png" alt="modifyWarehouse" width= 60%> <br/>
+
+4. other functions including auto calculated numbers, showing product photos.
+
+<img src="./assets/img/pictureShowing.png" alt="pictureShowing" width= 60%> <br/>
+<img src="./assets/img/AutoCalculated.png" alt="AutoCalculated" width= 60%> <br/>
 
 ## License
 
@@ -66,6 +80,15 @@ https://github.com/mkdkck/bookSearchEngine
 
 or contact the owner via: colin173@gmail.com
 
+
+## UnderConstructions
+Here are few functions are waiting to be developed:
+1. personal profile page
+2. upload pic function for personal image and product photo
+3. organization & user control
+4. report generation
+5. product editing page
+6. better constructed back end logic of the data
 
 ## Badges
 
