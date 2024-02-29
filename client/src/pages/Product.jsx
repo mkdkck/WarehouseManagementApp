@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import NewProduct from '../components/NewProduct'
-import ModifyCategory from '../components/ModifyCategory'
+import ModifyProduct from '../components/ModifyProduct'
 
 const Product = () => {
     const [showModifyForm, setShowModifyForm] = useState(false);
@@ -14,7 +14,6 @@ const Product = () => {
     if (data) { products = data.products }
 
     const showTotalQty = (product) => {
-
         let totalQty = 0;
         product.productStacks.forEach(productStack => {
             const subtotalQty =
@@ -71,7 +70,7 @@ const Product = () => {
                                     ))}
                             </tbody>
                         </table>
-                        {showModifyForm && <ModifyCategory product={selectedProduct} setShowModifyForm={setShowModifyForm} />}
+                        {showModifyForm && <ModifyProduct selectedProduct={selectedProduct} setShowModifyForm={setShowModifyForm} />}
 
                         <div className="card-actions justify-end">
                             <div className="join">

@@ -20,14 +20,4 @@ const warehouseSchema = new Schema({
 
 const Warehouse = model('Warehouse', warehouseSchema);
 
-warehouseSchema.pre('remove', async function (next) {
-    try {
-        await Product.deleteMany({ 'productStacks.warehouse': this._id });
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
-
-
 module.exports = Warehouse;

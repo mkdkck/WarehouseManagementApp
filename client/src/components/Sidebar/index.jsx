@@ -193,8 +193,12 @@ function Sidebar() {
                                             Manage Organization
                                         </Link>
                                     </li>
-                                    <li><a>Manage Users</a></li>
-                                    <li><a>Manage Roles</a></li>
+                                    <li>
+                                        <Link
+                                            to='/User'>
+                                            Manage Users
+                                        </Link>
+                                    </li>
                                 </ul>
                             </details>
                         </li>
