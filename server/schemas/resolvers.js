@@ -89,7 +89,7 @@ const resolvers = {
         },
 
         removeWarehouse: async (parent, args) => {
-            const warehouse = await Warehouse.findOneAndRemove(
+            const warehouse = await Warehouse.findOneAndDelete(
                 { _id: args._id });
 
             if (!warehouse) {
@@ -130,9 +130,8 @@ const resolvers = {
         },
 
         removePkConfig: async (parent, args) => {
-            const pkConfig = await PkConfig.findOneAndRemove(
+            const pkConfig = await PkConfig.findOneAndDelete(
                 { _id: args._id });
-
             if (!pkConfig) {
                 throw new Error('No package configuration found');
             }
@@ -171,7 +170,7 @@ const resolvers = {
         },
 
         removeCategory: async (parent, args) => {
-            const category = await Category.findOneAndRemove(
+            const category = await Category.findOneAndDelete(
                 { _id: args._id });
 
             if (!category) {

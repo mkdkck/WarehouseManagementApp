@@ -67,6 +67,8 @@ const NewProduct = () => {
                     );
                     setFilteredWarehouse(filteredWarehouses);
                 }
+                console.log("warehousesData", warehouseData)
+
 
                 if (categoryData.data) {
                     const categoryList = categoryData.data.categories;

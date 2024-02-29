@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('./Product');
 
 const { Schema, model } = mongoose;
 
@@ -48,5 +49,6 @@ pkConfigSchema.virtual('palletTotalPks').get(function () {
 });
 
 const PkConfig = model('PkConfig', pkConfigSchema);
+
 
 module.exports = PkConfig;

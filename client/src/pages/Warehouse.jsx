@@ -69,4 +69,5 @@ const Warehouse = () => {
     );
 };
 
+
 export default Warehouse;

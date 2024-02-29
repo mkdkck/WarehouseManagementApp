@@ -21,6 +21,7 @@ import Product from './pages/Product.jsx'
 import Organization from './pages/Organization'
 import PkConfig from './pages/PkConfig'
 import Category from './pages/Category'
+import User from './pages/User'
 
 
 
@@ -73,6 +74,9 @@ const router = createBrowserRouter([
       }, {
         path: '/Category',
         element: Auth.loggedIn() ? <Category /> : <Navigate to='/Login' />
+      }, {
+        path: '/User',
+        element: Auth.loggedIn() ? <User /> : <Navigate to='/Login' />
       }
     ]
   }
